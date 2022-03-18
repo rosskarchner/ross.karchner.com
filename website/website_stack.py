@@ -82,7 +82,7 @@ class WebsiteStack(Stack):
         micropub = MicropubApi(
             self,
             "micropub",
-            timezone=pytz.timezone("US/Eastern"),
+            timezone="US/Eastern",
             bucket=content_bucket,
             token_endpoint= 'https://tokens.indieauth.com/token',
             me_url= 'https://' + domain

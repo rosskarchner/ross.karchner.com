@@ -4,6 +4,8 @@ requests
 multidict
 #dataclasses
 #sansio-multipart
-#unicode-slugify
-#pytz
+unicode-slugify
+pytz
 #python-dateutil
+granary
+slugify

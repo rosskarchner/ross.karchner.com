@@ -59,8 +59,6 @@ def normalize_micropub_post(event, headers):
     header_access_token = None
     body_access_token = None
 
-    files = {}
-
     if "Authorization" in headers:
         header_access_token = headers["Authorization"][7:]
 
@@ -74,32 +72,6 @@ def normalize_micropub_post(event, headers):
 
     elif headers["content-type"] == "application/x-www-form-urlencoded":
         parsed_body = parse_qsl(body)
-        print("URL encoded post")
-        # print(parsed_body)
         json_document, body_access_token = kvpairs_to_mfjson(parsed_body)
 
-    elif headers["content-type"].startswith("multipart/form-data"):
-        content_type = event["headers"]["content-type"]
-        body_with_content_type = (
-            b"Content-Type: " + content_type.encode() + b"\r\n" + body
-        )
-        msg = email.parser.BytesParser().parsebytes(body_with_content_type)
-        kvpairs = [
-            (
-                part.get_param("name", header="content-disposition"),
-                part.get_payload(decode=False),
-            )
-            for part in msg.get_payload()
-            if not part.get_param("filename", header="content-disposition")
-        ]
-
-        files = {
-            part.get_param("filename", header="content-disposition"): part.get_payload(
-                decode=False
-            )
-            for part in msg.get_payload()
-            if part.get_param("filename", header="content-disposition")
-        }
-        json_document, body_access_token = kvpairs_to_mfjson(kvpairs)
-
-    return json_document, header_access_token or body_access_token, files
+    return json_document, header_access_token or body_access_token

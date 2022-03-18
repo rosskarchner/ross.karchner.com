@@ -35,9 +35,25 @@ class MicropubApi(Construct):
         micropub_post_function = lambda_python.PythonFunction(
             self,
             "MicropubPostFunction",
-            entry="function_code/micropub",
-            index="app.py",
+            entry="function_code/micropub_post",
             handler='micropub_post',
+            runtime=lambda_.Runtime.PYTHON_3_8,
+            environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url, 'TZ': timezone}
+        )
+        micropub_get_function = lambda_python.PythonFunction(
+            self,
+            "MicropubGetFunction",
+            entry="function_code/micropub_get",
+            handler='micropub_get',
+            runtime=lambda_.Runtime.PYTHON_3_8,
+            environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url}
+        )
+
+        micropub_media_function = lambda_python.PythonFunction(
+            self,
+            "MicropubMediaFunction",
+            entry="function_code/micropub_media",
+            handler='lambda_handler',
             runtime=lambda_.Runtime.PYTHON_3_8,
             environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url}
         )
@@ -46,8 +62,29 @@ class MicropubApi(Construct):
             "MicropubPostIntegration", micropub_post_function
         )
 
+
+        micropub_get_intergation = HttpLambdaIntegration(
+            "MicropubGetIntegration", micropub_get_function
+        )
+
+        micropub_media_intergation = HttpLambdaIntegration(
+            "MicropubGetIntegration", micropub_get_function
+        )
+
+
         self.api.add_routes(
             path="/micropub",
             methods=[apigwv2.HttpMethod.POST],
             integration=micropub_post_intergation,
+        )
+        self.api.add_routes(
+            path="/micropub",
+            methods=[apigwv2.HttpMethod.GET],
+            integration=micropub_get_intergation,
+        )
+
+        self.api.add_routes(
+            path="/micropub-media",
+            methods=[apigwv2.HttpMethod.POST],
+            integration=micropub_media_intergation,
         )
