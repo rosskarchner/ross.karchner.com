@@ -1,3 +1,5 @@
-pytest==6.2.5
+pytest
 black
+isort
 cfn-lint
+-r function_code/micropub_post/requirements.txt
