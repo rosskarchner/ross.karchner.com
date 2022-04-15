@@ -9,6 +9,7 @@ from aws_cdk import (
 
 import aws_cdk.aws_cloudfront as cloudfront
 import aws_cdk.aws_cloudfront_origins as origins
+from aws_cdk.aws_s3_assets import Asset
 
 from constructs import Construct
 import pytz
@@ -17,6 +18,8 @@ from .micropub import MicropubApi
 
 
 class CdnWithDNSAndCert(Construct):
+    """Cloudfront Distro, with Route53 and ACM Cert"""
+
     def __init__(
         self,
         scope: Construct,
@@ -65,6 +68,7 @@ class CdnWithDNSAndCert(Construct):
 
 
 class WebsiteStack(Stack):
+    """The Website"""
     def __init__(self, scope: Construct, construct_id: str, domain, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
         feed_bucket = s3.Bucket(
@@ -74,8 +78,10 @@ class WebsiteStack(Stack):
             self, "PostsBucket", website_index_document="index.html"
         )
 
-        hosted_zone = route53.HostedZone.from_lookup(
-            self, "Zone", domain_name=domain
+        hosted_zone = route53.HostedZone.from_lookup(self, "Zone", domain_name=domain)
+
+        template_bundle = Asset(self, "MicropubTemplateBundle",
+            path = 'templates'
         )
 
 
@@ -84,10 +90,11 @@ class WebsiteStack(Stack):
             "micropub",
             timezone="US/Eastern",
             bucket=content_bucket,
-            token_endpoint= 'https://tokens.indieauth.com/token',
-            me_url= 'https://' + domain
+            template_bundle = template_bundle,
+            token_endpoint="https://tokens.indieauth.com/token",
+            me_url="https://" + domain,
+            author_name="Ross M Karchner"
         )
-
 
         cf_function_code = """
         function handler(event) {
@@ -108,7 +115,9 @@ class WebsiteStack(Stack):
             // Return the response to viewers 
             return response;
         }
-        """ % (micropub.api.url)
+        """ % (
+            micropub.api.url
+        )
 
         cf_function = cloudfront.Function(
             self, "Function", code=cloudfront.FunctionCode.from_inline(cf_function_code)
@@ -131,5 +140,3 @@ class WebsiteStack(Stack):
         )
 
         cdn.distribution.add_behavior("/feeds/*", origins.S3Origin(feed_bucket))
-
-

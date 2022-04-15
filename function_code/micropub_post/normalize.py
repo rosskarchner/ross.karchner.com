@@ -1,26 +1,22 @@
-import email
-import json
 import base64
-import os
-from urllib.parse import parse_qsl, urljoin
-import multidict
+import json
 
 
 def kvpairs_to_mfjson(kvpairs):
+    """
+    Take a set of key-value pairs from an incoming post, and build a microformats2
+    JSON structure.
+    """
     types = set(["h-entry"])
     action = None
     url = None
     properties = {}
     access_token = None
-    files = {}
 
-    print(kvpairs)
     for key, value in kvpairs:
-        print(key)
-        if type(key) == bytes:
+        if isinstance(bytes, key):
             key = key.decode("utf-8")
-        print(key)
-        if type(value) == bytes:
+        if isinstance(bytes, value):
             value = value.decode("utf-8")
 
         if key == "h":
@@ -40,7 +36,9 @@ def kvpairs_to_mfjson(kvpairs):
             if key_no_brackets in properties:
                 properties[key_no_brackets].append(value)
             else:
-                properties[key_no_brackets]=[value,]
+                properties[key_no_brackets] = [
+                    value,
+                ]
         else:
             properties[key] = [value]
 
@@ -55,6 +53,11 @@ def kvpairs_to_mfjson(kvpairs):
 
 
 def normalize_micropub_post(event, headers):
+    """
+    Take an incoming AWS Gateway event, which could be base64 encoded,
+    could be json, or could be form encoded, and return a microformats2
+    json structure, and an access code.
+    """
 
     header_access_token = None
     body_access_token = None

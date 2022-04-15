@@ -1,5 +1,6 @@
 boto3
 #mf2py
+mf2util
 requests
 multidict
 #dataclasses
@@ -7,5 +8,5 @@ multidict
 unicode-slugify
 pytz
 #python-dateutil
-granary
 slugify
+chevron

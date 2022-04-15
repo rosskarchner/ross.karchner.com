@@ -18,4 +18,7 @@ RUN if [ "${NODE_VERSION}" != "none" ]; then su vscode -c "umask 0002 && . /usr/
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
 
 # [Optional] Uncomment this line to install global node packages.
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g aws-cdk" 2>&1
+RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g aws-cdk && pip install -U pip" 2>&1
+RUN mkdir /etc/docker
+RUN echo '{"storage-driver": "overlay2"}' > /etc/docker/daemon.json
+RUN curl -o /tmp/sam.zip  https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -L && cd /tmp && unzip sam.zip -d sam-installation &&  ./sam-installation/install

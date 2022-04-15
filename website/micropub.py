@@ -1,5 +1,5 @@
 from aws_cdk import (
-    # Duration,
+    Duration,
     Stack,
     aws_s3 as s3,
     aws_route53 as route53,
@@ -8,7 +8,7 @@ from aws_cdk import (
     aws_apigatewayv2_alpha as apigwv2,
     aws_lambda as lambda_,
     aws_ecr_assets as ecr_assets,
-    aws_lambda_python_alpha as lambda_python
+    aws_lambda_python_alpha as lambda_python,
 )
 
 
@@ -26,7 +26,16 @@ import pytz
 
 class MicropubApi(Construct):
     def __init__(
-        self, scope: Construct, construct_id: str, bucket: s3.Bucket, timezone, token_endpoint = None, me_url= None, **kwargs
+        self,
+        scope: Construct,
+        construct_id: str,
+        bucket: s3.Bucket,
+        template_bundle,
+        timezone,
+        token_endpoint,
+        me_url,
+        author_name,
+        **kwargs
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
@@ -36,32 +45,50 @@ class MicropubApi(Construct):
             self,
             "MicropubPostFunction",
             entry="function_code/micropub_post",
-            handler='micropub_post',
+            handler="micropub_post",
             runtime=lambda_.Runtime.PYTHON_3_8,
-            environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url, 'TZ': timezone}
+            timeout=Duration.seconds(20),
+            environment={
+                "BUCKET": bucket.bucket_name,
+                "TEMPLATE_BUCKET": template_bundle.s3_bucket_name,
+                "TEMPLATE_BUNDLE_KEY": template_bundle.s3_object_key,
+                "TOKEN_ENDPOINT": token_endpoint,
+                "ME_URL": me_url,
+                "AUTHOR_NAME": author_name,
+                "TZ": timezone,
+            },
         )
+
+
         micropub_get_function = lambda_python.PythonFunction(
             self,
             "MicropubGetFunction",
             entry="function_code/micropub_get",
-            handler='micropub_get',
+            handler="micropub_get",
             runtime=lambda_.Runtime.PYTHON_3_8,
-            environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url}
+            environment={
+                "BUCKET": bucket.bucket_name,
+                "TOKEN_ENDPOINT": token_endpoint,
+                "ME_URL": me_url,
+            },
         )
 
         micropub_media_function = lambda_python.PythonFunction(
             self,
             "MicropubMediaFunction",
             entry="function_code/micropub_media",
-            handler='lambda_handler',
+            handler="lambda_handler",
             runtime=lambda_.Runtime.PYTHON_3_8,
-            environment= {'BUCKET': bucket.bucket_name, 'TOKEN_ENDPOINT': token_endpoint, 'ME_URL':me_url}
+            environment={
+                "BUCKET": bucket.bucket_name,
+                "TOKEN_ENDPOINT": token_endpoint,
+                "ME_URL": me_url,
+            },  
         )
 
         micropub_post_intergation = HttpLambdaIntegration(
             "MicropubPostIntegration", micropub_post_function
         )
-
 
         micropub_get_intergation = HttpLambdaIntegration(
             "MicropubGetIntegration", micropub_get_function
@@ -70,7 +97,6 @@ class MicropubApi(Construct):
         micropub_media_intergation = HttpLambdaIntegration(
             "MicropubGetIntegration", micropub_get_function
         )
-
 
         self.api.add_routes(
             path="/micropub",
@@ -88,3 +114,5 @@ class MicropubApi(Construct):
             methods=[apigwv2.HttpMethod.POST],
             integration=micropub_media_intergation,
         )
+
+        template_bundle.grant_read(micropub_post_function)
