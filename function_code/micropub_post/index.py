@@ -9,9 +9,10 @@ import pytz
 import slugify
 from botocore.errorfactory import ClientError
 
-from .auth import validate_token
-from .normalize import normalize_micropub_post
-from .render import document_to_html
+from tokens import validate_token
+from normalize import normalize_micropub_post
+from render import document_to_html
+
 
 
 def s3_object_exists(path):

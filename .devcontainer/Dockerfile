@@ -22,3 +22,4 @@ RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g aws-cdk &
 RUN mkdir /etc/docker
 RUN echo '{"storage-driver": "overlay2"}' > /etc/docker/daemon.json
 RUN curl -o /tmp/sam.zip  https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip -L && cd /tmp && unzip sam.zip -d sam-installation &&  ./sam-installation/install
+COPY sitecustomize.py /usr/local/lib/python3.10/site-packages/sitecustomize.py

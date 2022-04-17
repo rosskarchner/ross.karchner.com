@@ -1,5 +1,6 @@
 import base64
 import json
+from urllib.parse import parse_qsl
 
 
 def kvpairs_to_mfjson(kvpairs):
@@ -14,9 +15,9 @@ def kvpairs_to_mfjson(kvpairs):
     access_token = None
 
     for key, value in kvpairs:
-        if isinstance(bytes, key):
+        if isinstance(key,bytes):
             key = key.decode("utf-8")
-        if isinstance(bytes, value):
+        if isinstance(value,bytes):
             value = value.decode("utf-8")
 
         if key == "h":
