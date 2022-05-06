@@ -1,1 +1,46 @@
-I am an entry
+
+<!DOCTYPE html><html lang="en-US" prefix="og: https://ogp.me/ns#">
+<head><meta charset="utf-8">
+<title> {{#author}}{{name}}:{{/author}} {{name}} </title>
+<style>
+main {
+  max-width: 38rem;
+  padding: 1.5rem;
+  margin: auto;
+}
+.metadata {
+    color:grey;
+    margin-top: 1em;
+}
+</style>
+</head>
+<body>
+<main>
+<div class="h-entry {{post_type}}">
+ <h1 class="p-name">{{name}}</h1>
+
+{{#summary}}
+ <div class="e-summary"> {{summary}}</div>
+{{/summary}}
+
+{{#in-reply-to}}
+<p>
+<em>
+A reply to: <a href="{{url}}" class="u-in-reply-to"> {{url}}</a>
+</em>
+</p>
+{{/in-reply-to}}
+{{#content}}
+ <div class="e-content">
+  {{{content}}}
+ </div>
+ {{/content}}
+ <div class="metadata">
+ {{#author}}
+This {{post_type}} was published by <a href="{{url}}" class="p-author h-card>{{name}}</a>
+ {{/author}}
+on <time class="dt-published" datetime="{{published}}">{{published_date_formatted}} at {{published_time_formatted}} ({{timezone}})</time>
+ </div>
+</div>
+</main>
+</body>

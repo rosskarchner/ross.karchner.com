@@ -14,7 +14,7 @@ def validate_token(token):
     endpoint = os.environ["TOKEN_ENDPOINT"]
     me = os.environ["ME_URL"]
 
-    headers = {"Authorization": "Bearer " + token}
+    headers = {"Authorization": "Bearer " + token, "Accept": "application/json"}
     response = requests.get(endpoint, headers=headers)
 
     scopes = []
@@ -28,6 +28,7 @@ def validate_token(token):
             token_data = response.json()
 
         if token_data["me"] == me:
-            return token_data.get("scope").split()
+            scopes = token_data.get("scope").split()
+            valid = True
 
     return valid, scopes

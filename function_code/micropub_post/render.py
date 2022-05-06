@@ -2,6 +2,7 @@ import os
 import pathlib
 import tempfile
 import zipfile
+import json
 
 import boto3
 import chevron
@@ -24,7 +25,9 @@ default_template = template_path / "hentry.mustache"
 
 
 def document_to_html(document):
+    print(json.dumps(document))
     post_type = mf2util.post_type_discovery(document)
+    # print(post_type)
     post_url = document["properties"]["url"][0]
     template_for_post_type = template_path / ("hentry.%s.mustache" % post_type)
     if template_for_post_type.exists():
@@ -40,4 +43,25 @@ def document_to_html(document):
         },
         source_url=post_url,
     )
+
+    context["post_type"] = post_type
+
+    if "published" in context:
+        published = context["published"]
+        if hasattr(published, "hour"):
+            context["published_time_formatted"] = published.strftime(
+                os.environ["TIME_FORMAT"]
+            )
+        context["published_date_formatted"] = published.strftime(
+            os.environ["DATE_FORMAT"]
+        )
+    if "updated" in context:
+        updated = context["updated"]
+        if hasattr(updated, "hour"):
+            context["updated_time_formatted"] = updated.strftime(
+                os.environ["TIME_FORMAT"]
+            )
+        context["updated_date_formatted"] = updated.strftime(os.environ["DATE_FORMAT"])
+    context['timezone'] = os.environ['TZ']
+    print(context)
     return chevron.render(template, context, partials_path=template_path)

@@ -1,7 +1,7 @@
 import datetime
 import os
 import random
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import boto3
 import multidict
@@ -13,15 +13,18 @@ from tokens import validate_token
 from normalize import normalize_micropub_post
 from render import document_to_html
 
+from htmllaundry import strip_markup
+
+s3 = boto3.client("s3")
+bucket_name = os.environ["BUCKET"]
 
 
 def s3_object_exists(path):
     """
     check if an object exists in the destination S3 bucket
     """
-    s3 = boto3.client("s3")
     try:
-        return s3.head_object(Bucket=os.environ["BUCKET"], Key=path)
+        return s3.head_object(Bucket=bucket_name, Key=path)
     except ClientError:
         # Not found
         return False
@@ -61,7 +64,7 @@ def annotate_new_post(document, update=False):
 
     while path is None:
         original_slug = slug
-        speculative_path = "/%s/%s/%s.html" % (
+        speculative_path = "%s/%s/%s.html" % (
             pubdate.year,
             pubdate.month,
             slug,
@@ -70,7 +73,7 @@ def annotate_new_post(document, update=False):
         if not existing_item:
             path = speculative_path
         else:
-            slug = original_slug + "-" + random.randint(1, 1000)
+            slug = original_slug + "-" + str(random.randint(1, 1000))
 
     post_url = urljoin(os.environ["ME_URL"], path)
     document["properties"]["url"] = [post_url]
@@ -83,6 +86,12 @@ def annotate_new_post(document, update=False):
             },
         }
     ]
+
+    content_list = document["properties"].get("content", [])
+    for content_item in content_list:
+        if (isinstance(content_item, dict)
+        and "html" in content_item):
+            content_item["value"] = strip_markup(content_item["html"])
 
     return document
 
@@ -101,8 +110,7 @@ def micropub_post(event, context):
     if event["body"] == "":
         return {"statusCode": 400, "body": "missing body"}
 
-    json_document, access_token = normalize_micropub_post(
-        event, headers=headers)
+    json_document, access_token = normalize_micropub_post(event, headers=headers)
 
     if access_token:
         valid, scopes = validate_token(access_token)
@@ -127,10 +135,14 @@ def micropub_post(event, context):
     else:
         return {"statusCode": 400, "body": "not a supported action"}
 
-    if valid and 'create' in scopes:
-        print(scopes)
-        # TODO: validate SCOPE!
-        return {"statusCode": 202, "body": document_to_html(complete_document)}
+    if valid and "create" in scopes:
+
+        url = complete_document["properties"]["url"][0]
+        key = urlparse(url).path[1:]  #
+        html = document_to_html(complete_document)
+        s3.put_object(Bucket=bucket_name, Key=key, Body=html, ContentType="text/html")
+
+        return {"statusCode": 201, "headers": {"Location": url}}
 
     # document, access_token, files = normalize_micropub_post(event)
     # users = TokenUser(access_token)

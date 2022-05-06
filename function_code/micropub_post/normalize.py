@@ -15,9 +15,9 @@ def kvpairs_to_mfjson(kvpairs):
     access_token = None
 
     for key, value in kvpairs:
-        if isinstance(key,bytes):
+        if isinstance(key, bytes):
             key = key.decode("utf-8")
-        if isinstance(value,bytes):
+        if isinstance(value, bytes):
             value = value.decode("utf-8")
 
         if key == "h":

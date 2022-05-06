@@ -1,27 +1,14 @@
-from aws_cdk import (
-    Duration,
-    Stack,
-    aws_s3 as s3,
-    aws_route53 as route53,
-    aws_route53_targets as targets,
-    aws_certificatemanager as acm,
-    aws_apigatewayv2_alpha as apigwv2,
-    aws_lambda as lambda_,
-    aws_ecr_assets as ecr_assets,
-    aws_lambda_python_alpha as lambda_python,
-)
-
-
 import aws_cdk.aws_cloudfront as cloudfront
 import aws_cdk.aws_cloudfront_origins as origins
-
-from aws_cdk.aws_lambda import Runtime
-from aws_cdk.aws_apigatewayv2_integrations_alpha import HttpLambdaIntegration
-
-
-from constructs import Construct
-
 import pytz
+from aws_cdk import Duration
+from aws_cdk import aws_apigatewayv2_alpha as apigwv2
+from aws_cdk import aws_lambda as lambda_
+from aws_cdk import aws_lambda_python_alpha as lambda_python
+from aws_cdk import aws_s3 as s3
+from aws_cdk.aws_apigatewayv2_integrations_alpha import HttpLambdaIntegration
+from aws_cdk.aws_lambda import Runtime
+from constructs import Construct
 
 
 class MicropubApi(Construct):
@@ -35,6 +22,8 @@ class MicropubApi(Construct):
         token_endpoint,
         me_url,
         author_name,
+        date_format = '%A, %B %-d',
+        time_format = '%-I:%-M %p',
         **kwargs
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -46,7 +35,7 @@ class MicropubApi(Construct):
             "MicropubPostFunction",
             entry="function_code/micropub_post",
             handler="micropub_post",
-            runtime=lambda_.Runtime.PYTHON_3_8,
+            runtime=lambda_.Runtime.PYTHON_3_9,
             timeout=Duration.seconds(20),
             environment={
                 "BUCKET": bucket.bucket_name,
@@ -56,10 +45,12 @@ class MicropubApi(Construct):
                 "ME_URL": me_url,
                 "AUTHOR_NAME": author_name,
                 "TZ": timezone,
+                "DATE_FORMAT": date_format,
+                "TIME_FORMAT": time_format
             },
         )
-
-
+        bucket.grant_read_write(micropub_post_function)
+    
         micropub_get_function = lambda_python.PythonFunction(
             self,
             "MicropubGetFunction",
@@ -83,7 +74,7 @@ class MicropubApi(Construct):
                 "BUCKET": bucket.bucket_name,
                 "TOKEN_ENDPOINT": token_endpoint,
                 "ME_URL": me_url,
-            },  
+            },
         )
 
         micropub_post_intergation = HttpLambdaIntegration(

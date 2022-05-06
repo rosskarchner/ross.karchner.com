@@ -1,19 +1,14 @@
-from aws_cdk import (
-    # Duration,
-    Stack,
-    aws_s3 as s3,
-    aws_route53 as route53,
-    aws_route53_targets as targets,
-    aws_certificatemanager as acm,
-)
-
-import aws_cdk.aws_cloudfront as cloudfront
-import aws_cdk.aws_cloudfront_origins as origins
+from aws_cdk import Stack
+from aws_cdk import aws_certificatemanager as acm
+from aws_cdk import aws_cloudfront as cloudfront
+from aws_cdk import aws_cloudfront_origins as origins
+from aws_cdk import aws_route53 as route53
+from aws_cdk import aws_route53_targets as targets
+from aws_cdk import aws_s3 as s3  # Duration,
 from aws_cdk.aws_s3_assets import Asset
-
 from constructs import Construct
-import pytz
 
+from .bucket_file import FileToBucket
 from .micropub import MicropubApi
 
 
@@ -43,8 +38,11 @@ class CdnWithDNSAndCert(Construct):
             "CDN",
             domain_names=domain_names,
             default_behavior=default_behavior,
-            certificate=cert,
+            default_root_object='index.html',
+            certificate=cert
         )
+
+
 
         ipv4 = route53.ARecord(
             self,
@@ -69,31 +67,33 @@ class CdnWithDNSAndCert(Construct):
 
 class WebsiteStack(Stack):
     """The Website"""
+
     def __init__(self, scope: Construct, construct_id: str, domain, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        feed_bucket = s3.Bucket(
-            self, "FeedsBucket", website_index_document="index.html"
-        )
-        content_bucket = s3.Bucket(
-            self, "PostsBucket", website_index_document="index.html"
-        )
+        feed_bucket = s3.Bucket(self, "FeedsBucket")
+        content_bucket = s3.Bucket(self, "PostsBucket")
 
         hosted_zone = route53.HostedZone.from_lookup(self, "Zone", domain_name=domain)
 
-        template_bundle = Asset(self, "MicropubTemplateBundle",
-            path = 'templates'
-        )
+        template_bundle = Asset(self, "MicropubTemplateBundle", path="templates")
 
+        index_html = FileToBucket(
+            self,
+            "IndexHtml",
+            feed_bucket.bucket_name,
+            file_name="index.html",
+            file_contents=open('placeholder.html').read(),
+        )
 
         micropub = MicropubApi(
             self,
             "micropub",
             timezone="US/Eastern",
             bucket=content_bucket,
-            template_bundle = template_bundle,
+            template_bundle=template_bundle,
             token_endpoint="https://tokens.indieauth.com/token",
-            me_url="https://" + domain,
-            author_name="Ross M Karchner"
+            me_url="https://" + domain + '/',
+            author_name="Ross M Karchner",
         )
 
         cf_function_code = """
@@ -122,6 +122,8 @@ class WebsiteStack(Stack):
         cf_function = cloudfront.Function(
             self, "Function", code=cloudfront.FunctionCode.from_inline(cf_function_code)
         )
+        
+        oai = cloudfront.OriginAccessIdentity(self, "WebsiteOriginAccessIdentity")
 
         cdn = CdnWithDNSAndCert(
             self,
@@ -129,14 +131,18 @@ class WebsiteStack(Stack):
             hosted_zone=hosted_zone,
             domain_names=[domain],
             default_behavior=cloudfront.BehaviorOptions(
-                origin=origins.S3Origin(content_bucket),
-                function_associations=[
+                origin=origins.S3Origin(content_bucket, origin_access_identity=oai),
+            ),
+        )
+        # Can I do this in one statement?
+        cdn.distribution.add_behavior("/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai))
+        cdn.distribution.add_behavior("index.html", origins.S3Origin(feed_bucket, origin_access_identity=oai),
+        function_associations=[
                     {
                         "function": cf_function,
                         "eventType": cloudfront.FunctionEventType.VIEWER_RESPONSE,
                     }
-                ],
-            ),
-        )
+                ],)
 
-        cdn.distribution.add_behavior("/feeds/*", origins.S3Origin(feed_bucket))
+        feed_bucket.grant_read(oai)
+        content_bucket.grant_read(oai)

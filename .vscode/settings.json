@@ -2,6 +2,7 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/cdk.out/*/**": true
-  }
+  },
+  "python.linting.pylintArgs": ["--disable", "consider-using-f-string,missing-module-docstring,missing-function-docstring,missing-class-docstring"]
 
 }
