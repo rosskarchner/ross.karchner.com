@@ -46,6 +46,7 @@ def document_to_html(document):
 
     context["post_type"] = post_type
 
+    # provide pre-formatted date and time
     if "published" in context:
         published = context["published"]
         if hasattr(published, "hour"):
@@ -62,6 +63,11 @@ def document_to_html(document):
                 os.environ["TIME_FORMAT"]
             )
         context["updated_date_formatted"] = updated.strftime(os.environ["DATE_FORMAT"])
-    context['timezone'] = os.environ['TZ']
+    context["timezone"] = os.environ["TZ"]
+
+    # mf2util doesn't seem to pull in photo alt text
+    if "photo" in document["properties"]:
+        context["photos"] = document["properties"]["photo"]
+
     print(context)
     return chevron.render(template, context, partials_path=template_path)

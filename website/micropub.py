@@ -7,8 +7,9 @@ from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_lambda_python_alpha as lambda_python
 from aws_cdk import aws_s3 as s3
 from aws_cdk.aws_apigatewayv2_integrations_alpha import HttpLambdaIntegration
-from aws_cdk.aws_lambda import Runtime
 from constructs import Construct
+
+PYTHON_RUNTIME = lambda_.Runtime.PYTHON_3_9
 
 
 class MicropubApi(Construct):
@@ -22,20 +23,21 @@ class MicropubApi(Construct):
         token_endpoint,
         me_url,
         author_name,
-        date_format = '%A, %B %-d',
-        time_format = '%-I:%-M %p',
+        authorizer,
+        date_format="%A, %B %-d",
+        time_format="%-I:%-M %p",
         **kwargs
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        self.api = apigwv2.HttpApi(self, "MicropubApi")
+        self.api = apigwv2.HttpApi(self, "MicropubApi", default_authorizer=authorizer)
 
-        micropub_post_function = lambda_python.PythonFunction(
+        micropub_clean_function = lambda_python.PythonFunction(
             self,
-            "MicropubPostFunction",
-            entry="function_code/micropub_post",
-            handler="micropub_post",
-            runtime=lambda_.Runtime.PYTHON_3_9,
+            "MicropubCleanFunction",
+            entry="function_code/micropub_clean",
+            handler="lambda_handler",
+            runtime=PYTHON_RUNTIME,
             timeout=Duration.seconds(20),
             environment={
                 "BUCKET": bucket.bucket_name,
@@ -46,21 +48,34 @@ class MicropubApi(Construct):
                 "AUTHOR_NAME": author_name,
                 "TZ": timezone,
                 "DATE_FORMAT": date_format,
-                "TIME_FORMAT": time_format
+                "TIME_FORMAT": time_format,
             },
         )
-        bucket.grant_read_write(micropub_post_function)
-    
+        bucket.grant_read_write(micropub_clean_function)
+
+        micropub_proxy_function = lambda_python.PythonFunction(
+            self,
+            "MicropubProxyFunction",
+            entry="function_code/micropub_proxy",
+            handler="lambda_handler",
+            runtime=PYTHON_RUNTIME,
+            timeout=Duration.seconds(20),
+            environment={
+                "MICROPUB_CLEAN": self.api.url + "micropub-clean",
+            },
+        )
+
         micropub_get_function = lambda_python.PythonFunction(
             self,
             "MicropubGetFunction",
             entry="function_code/micropub_get",
-            handler="micropub_get",
-            runtime=lambda_.Runtime.PYTHON_3_8,
+            handler="lambda_handler",
+            runtime=PYTHON_RUNTIME,
             environment={
                 "BUCKET": bucket.bucket_name,
                 "TOKEN_ENDPOINT": token_endpoint,
                 "ME_URL": me_url,
+                "MEDIA_ENDPOINT": self.api.url + "micropub-media",
             },
         )
 
@@ -69,7 +84,7 @@ class MicropubApi(Construct):
             "MicropubMediaFunction",
             entry="function_code/micropub_media",
             handler="lambda_handler",
-            runtime=lambda_.Runtime.PYTHON_3_8,
+            runtime=PYTHON_RUNTIME,
             environment={
                 "BUCKET": bucket.bucket_name,
                 "TOKEN_ENDPOINT": token_endpoint,
@@ -77,33 +92,37 @@ class MicropubApi(Construct):
             },
         )
 
-        micropub_post_intergation = HttpLambdaIntegration(
-            "MicropubPostIntegration", micropub_post_function
-        )
-
-        micropub_get_intergation = HttpLambdaIntegration(
-            "MicropubGetIntegration", micropub_get_function
-        )
-
-        micropub_media_intergation = HttpLambdaIntegration(
-            "MicropubGetIntegration", micropub_get_function
-        )
-
         self.api.add_routes(
             path="/micropub",
             methods=[apigwv2.HttpMethod.POST],
-            integration=micropub_post_intergation,
+            integration=HttpLambdaIntegration(
+                "MicropubProxyIntegration", micropub_proxy_function
+            ),
+            authorizer=apigwv2.HttpNoneAuthorizer(),
+        )
+
+        self.api.add_routes(
+            path="/micropub-clean",
+            methods=[apigwv2.HttpMethod.POST],
+            integration=HttpLambdaIntegration(
+                "MicropubCleanIntegration", micropub_clean_function
+            ),
         )
         self.api.add_routes(
             path="/micropub",
             methods=[apigwv2.HttpMethod.GET],
-            integration=micropub_get_intergation,
+            integration=HttpLambdaIntegration(
+                "MicropubGetIntegration", micropub_get_function
+            ),
         )
 
         self.api.add_routes(
             path="/micropub-media",
             methods=[apigwv2.HttpMethod.POST],
-            integration=micropub_media_intergation,
+            integration=HttpLambdaIntegration(
+                "MicropubMediaIntegration", micropub_media_function
+            ),
         )
 
-        template_bundle.grant_read(micropub_post_function)
+        template_bundle.grant_read(micropub_clean_function)
+        bucket.grant_write(micropub_media_function)

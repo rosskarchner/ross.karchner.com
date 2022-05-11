@@ -1,0 +1,13 @@
+boto3
+#mf2py
+mf2util
+requests
+multidict
+#dataclasses
+#sansio-multipart
+unicode-slugify
+pytz
+#python-dateutil
+slugify
+chevron
+htmllaundry

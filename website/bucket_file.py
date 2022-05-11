@@ -39,7 +39,7 @@ class FileToBucket(Construct):
             "Body": self.file_contents,
             "Bucket": bucket_name,
             "Key": self.file_name,
-            "ContentType": "text/html"
+            "ContentType": "text/html",
         }
 
         return AwsSdkCall(

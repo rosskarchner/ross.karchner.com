@@ -7,6 +7,7 @@ import boto3
 import multidict
 import pytz
 import slugify
+import mf2util
 from botocore.errorfactory import ClientError
 
 from tokens import validate_token
@@ -51,6 +52,13 @@ def annotate_new_post(document, update=False):
     ):
         document["properties"]["published"] = [now_iso]
         pubdate = now_local
+    else:
+    
+        pubdate_raw = (
+            document["properties"].get("published")
+            or document["properties"].get("dt-published")
+        )[0]
+        pubdate = mf2util.parse_datetime(pubdate_raw)
 
     slug_material = (
         document["properties"].get("mp-slug")
@@ -89,22 +97,24 @@ def annotate_new_post(document, update=False):
 
     content_list = document["properties"].get("content", [])
     for content_item in content_list:
-        if (isinstance(content_item, dict)
-        and "html" in content_item):
+        if isinstance(content_item, dict) and "html" in content_item:
             content_item["value"] = strip_markup(content_item["html"])
 
     return document
 
 
-def micropub_post(event, context):
+def lambda_handler(event, context):
     """
     interpret and act on incoming micropub post
     """
     headers = multidict.CIMultiDict(event["headers"])
-    if headers.get("content-type") not in [
-        "application/json",
-        "application/x-www-form-urlencoded",
-    ]:
+    allowed_content_types = ["application/json", "application/x-www-form-urlencoded"]
+    is_allowed_type = False
+    for content_type in allowed_content_types:
+        if headers.get("content-type").startswith(content_type):
+            is_allowed_type = True
+
+    if not is_allowed_type:
         return {"statusCode": 415, "body": "unknown content-type"}
 
     if event["body"] == "":

@@ -2,8 +2,8 @@ import json
 import os
 
 def lambda_handler(event, context):
-    # TODO implement
+    print(event)
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello from Lambda!')
+        'body': json.dumps({'media-endpoint': os.environ['MEDIA_ENDPOINT']})
     }

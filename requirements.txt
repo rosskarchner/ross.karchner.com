@@ -1,6 +1,7 @@
 aws-cdk-lib
 aws-cdk.aws-apigatewayv2-alpha
 aws-cdk.aws-apigatewayv2-integrations-alpha
+aws-cdk.aws-apigatewayv2-authorizers-alpha
 aws-cdk.aws-lambda-python-alpha
 aws-solutions-constructs.aws-sqs-lambda
 constructs>=10.0.0,<11.0.0

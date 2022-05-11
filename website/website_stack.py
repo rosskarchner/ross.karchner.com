@@ -1,11 +1,19 @@
 from aws_cdk import Stack
+from aws_cdk import Duration
 from aws_cdk import aws_certificatemanager as acm
 from aws_cdk import aws_cloudfront as cloudfront
 from aws_cdk import aws_cloudfront_origins as origins
 from aws_cdk import aws_route53 as route53
 from aws_cdk import aws_route53_targets as targets
 from aws_cdk import aws_s3 as s3  # Duration,
+from aws_cdk import aws_lambda as lambda_
+from aws_cdk import aws_lambda_python_alpha as lambda_python
 from aws_cdk.aws_s3_assets import Asset
+from aws_cdk.aws_apigatewayv2_authorizers_alpha import (
+    HttpLambdaAuthorizer,
+    HttpLambdaResponseType,
+)
+from aws_cdk.aws_apigatewayv2_integrations_alpha import HttpUrlIntegration
 from constructs import Construct
 
 from .bucket_file import FileToBucket
@@ -38,11 +46,9 @@ class CdnWithDNSAndCert(Construct):
             "CDN",
             domain_names=domain_names,
             default_behavior=default_behavior,
-            default_root_object='index.html',
-            certificate=cert
+            default_root_object="index.html",
+            certificate=cert,
         )
-
-
 
         ipv4 = route53.ARecord(
             self,
@@ -77,12 +83,33 @@ class WebsiteStack(Stack):
 
         template_bundle = Asset(self, "MicropubTemplateBundle", path="templates")
 
+        indieauth_token_authorizer_function = lambda_python.PythonFunction(
+            self,
+            "IndieAuthTokenAuthorizerFunction",
+            entry="function_code/authorize",
+            handler="lambda_handler",
+            runtime=lambda_.Runtime.PYTHON_3_9,
+            timeout=Duration.seconds(20),
+            environment={
+                "UPSTREAM_TOKEN_ENDPOINT": "https://tokens.indieauth.com/token",
+                "ME_URL": "https://" + domain + "/",
+            },
+        )
+
+        authorizer = HttpLambdaAuthorizer(
+            "IndieAuthTokenAuthorizer",
+            indieauth_token_authorizer_function,
+            response_types=[HttpLambdaResponseType.SIMPLE],
+            identity_source=["$request.header.Authorization"],
+            results_cache_ttl=Duration.minutes(10),
+        )
+
         index_html = FileToBucket(
             self,
             "IndexHtml",
             feed_bucket.bucket_name,
             file_name="index.html",
-            file_contents=open('placeholder.html').read(),
+            file_contents=open("placeholder.html").read(),
         )
 
         micropub = MicropubApi(
@@ -92,8 +119,9 @@ class WebsiteStack(Stack):
             bucket=content_bucket,
             template_bundle=template_bundle,
             token_endpoint="https://tokens.indieauth.com/token",
-            me_url="https://" + domain + '/',
+            me_url="https://" + domain + "/",
             author_name="Ross M Karchner",
+            authorizer=authorizer,
         )
 
         cf_function_code = """
@@ -122,7 +150,7 @@ class WebsiteStack(Stack):
         cf_function = cloudfront.Function(
             self, "Function", code=cloudfront.FunctionCode.from_inline(cf_function_code)
         )
-        
+
         oai = cloudfront.OriginAccessIdentity(self, "WebsiteOriginAccessIdentity")
 
         cdn = CdnWithDNSAndCert(
@@ -135,14 +163,19 @@ class WebsiteStack(Stack):
             ),
         )
         # Can I do this in one statement?
-        cdn.distribution.add_behavior("/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai))
-        cdn.distribution.add_behavior("index.html", origins.S3Origin(feed_bucket, origin_access_identity=oai),
-        function_associations=[
-                    {
-                        "function": cf_function,
-                        "eventType": cloudfront.FunctionEventType.VIEWER_RESPONSE,
-                    }
-                ],)
+        cdn.distribution.add_behavior(
+            "/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai)
+        )
+        cdn.distribution.add_behavior(
+            "index.html",
+            origins.S3Origin(feed_bucket, origin_access_identity=oai),
+            function_associations=[
+                {
+                    "function": cf_function,
+                    "eventType": cloudfront.FunctionEventType.VIEWER_RESPONSE,
+                }
+            ],
+        )
 
         feed_bucket.grant_read(oai)
         content_bucket.grant_read(oai)

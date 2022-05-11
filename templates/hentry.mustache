@@ -1,7 +1,15 @@
 
 <!DOCTYPE html><html lang="en-US" prefix="og: https://ogp.me/ns#">
 <head><meta charset="utf-8">
-<title> {{#author}}{{name}}:{{/author}} {{name}} </title>
+<title> {{#author}}{{name}}:{{/author}}
+ {{#name}}{{.}} {{/name}}
+ {{^name}}
+{{#content-plain}}
+  {{.}}
+{{/content-plain}}
+ {{/name}}
+ 
+  </title>
 <style>
 main {
   max-width: 38rem;
@@ -11,6 +19,10 @@ main {
 .metadata {
     color:grey;
     margin-top: 1em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Arial, Helvetica, sans-serif;
 }
 </style>
 </head>
@@ -35,9 +47,18 @@ A reply to: <a href="{{url}}" class="u-in-reply-to"> {{url}}</a>
   {{{content}}}
  </div>
  {{/content}}
+{{#photos}}
+  {{#value}}
+    <a href="{{value}}"><img class="u-photo" src="{{value}}" alt="{{alt}}" width="100%"/></a>
+  {{/value}}
+  {{^value}} {{! this means that photos is a list of strings, not a list of dictionaries }}
+    <a href="{{.}}"><img class="u-photo" src="{{.}}" width="100%"/></a>
+  {{/value}}
+{{/photos}}
+
  <div class="metadata">
  {{#author}}
-This {{post_type}} was published by <a href="{{url}}" class="p-author h-card>{{name}}</a>
+This {{post_type}} was published by <a href="{{url}}" class="p-author h-card">{{name}}</a>
  {{/author}}
 on <time class="dt-published" datetime="{{published}}">{{published_date_formatted}} at {{published_time_formatted}} ({{timezone}})</time>
  </div>

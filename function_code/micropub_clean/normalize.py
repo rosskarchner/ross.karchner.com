@@ -74,7 +74,9 @@ def normalize_micropub_post(event, headers):
     if headers["content-type"] == "application/json":
         json_document = json.loads(event["body"])
 
-    elif headers["content-type"] == "application/x-www-form-urlencoded":
+    elif headers["content-type"].startswith("application/x-www-form-urlencoded"):
+        # indigineous (Android) includes charset=UTF-8 in the content type.
+        # it might be worth doing something intelligent with that
         parsed_body = parse_qsl(body)
         json_document, body_access_token = kvpairs_to_mfjson(parsed_body)
 
