@@ -62,6 +62,7 @@ class MicropubApi(Construct):
             timeout=Duration.seconds(20),
             environment={
                 "MICROPUB_CLEAN": self.api.url + "micropub-clean",
+                "MICROPUB_MEDIA": self.api.url + "micropub-media",
             },
         )
 

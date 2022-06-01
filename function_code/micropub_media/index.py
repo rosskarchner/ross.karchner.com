@@ -6,9 +6,16 @@ from urllib.parse import urljoin
 import os
 
 s3 = boto3.client("s3")
-bucket_name = os.environ['BUCKET']
+bucket_name = os.environ["BUCKET"]
+
 
 def lambda_handler(event, context):
+    scopes = event["requestContext"]["authorizer"]["lambda"]["scopes"]
+    if "media" not in scopes:
+        return {
+            "statusCode": 403,
+            "body": json.dumps({"error": "insufficient_scope", "scope": "media"}),
+        }
     request_id = event["requestContext"]["requestId"]
     # headers = multidict.CIMultiDict(event["headers"])
     if event.get("isBase64Encoded"):
@@ -23,18 +30,15 @@ def lambda_handler(event, context):
     )
     msg = email.parser.BytesParser().parsebytes(body_with_content_type)
 
-
     for part in msg.get_payload():
         if part.get_param("name", header="content-disposition") == "file":
             filename = part.get_param("filename", header="content-disposition")
-            file_data = part.get_payload(
-                decode=True
-            )
-            content_type = part['Content-Type']
+            file_data = part.get_payload(decode=True)
+            content_type = part["Content-Type"]
 
-    key=f"media/{request_id}/{filename}"
+    key = f"media/{request_id}/{filename}"
     s3.put_object(Bucket=bucket_name, Key=key, Body=file_data, ContentType=content_type)
 
-    url = urljoin(os.environ['ME_URL'],key)
+    url = urljoin(os.environ["ME_URL"], key)
 
-    return {"statusCode": 201, "headers": {'Location':url }}
+    return {"statusCode": 201, "headers": {"Location": url}}

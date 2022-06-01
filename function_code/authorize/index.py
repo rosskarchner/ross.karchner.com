@@ -11,9 +11,8 @@ def lambda_handler(event, context):
     and return a bool indicating whether it's valid, and a list
     of scopes
     """
-    print(event)
     endpoint = os.environ["UPSTREAM_TOKEN_ENDPOINT"]
-    me = os.environ["ME_URL"]
+    me_url = os.environ["ME_URL"]
 
     authorization_header = event['identitySource'][0]
 
@@ -30,7 +29,7 @@ def lambda_handler(event, context):
         else:
             token_data = response.json()
 
-        if token_data["me"] == me:
+        if token_data["me"] == me_url:
             scopes = token_data.get("scope").split()
             valid = True
 
@@ -38,5 +37,5 @@ def lambda_handler(event, context):
     if valid and scopes:
          return {"isAuthorized": True, 
          "context": {'scopes': scopes}}       
-    else:
-        return {"isAuthorized": False}
+
+    return {"isAuthorized": False}

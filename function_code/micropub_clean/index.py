@@ -2,7 +2,7 @@ import datetime
 import os
 import random
 from urllib.parse import urljoin, urlparse
-
+import json
 import boto3
 import multidict
 import pytz
@@ -10,8 +10,6 @@ import slugify
 import mf2util
 from botocore.errorfactory import ClientError
 
-from tokens import validate_token
-from normalize import normalize_micropub_post
 from render import document_to_html
 
 from htmllaundry import strip_markup
@@ -108,60 +106,28 @@ def lambda_handler(event, context):
     interpret and act on incoming micropub post
     """
     headers = multidict.CIMultiDict(event["headers"])
-    allowed_content_types = ["application/json", "application/x-www-form-urlencoded"]
-    is_allowed_type = False
-    for content_type in allowed_content_types:
-        if headers.get("content-type").startswith(content_type):
-            is_allowed_type = True
-
-    if not is_allowed_type:
-        return {"statusCode": 415, "body": "unknown content-type"}
+    scopes = event['requestContext']['authorizer']['lambda']['scopes']
 
     if event["body"] == "":
         return {"statusCode": 400, "body": "missing body"}
 
-    json_document, access_token = normalize_micropub_post(event, headers=headers)
+    if headers["content-type"] == "application/json":
+        json_document = json.loads(event["body"])
 
-    if access_token:
-        valid, scopes = validate_token(access_token)
-    else:
-        return {"statusCode": 403, "body": "no access token found"}
+    action = json_document.get("action", "create")
 
-    if not valid:
-        return {"statusCode": 403, "body": "access token invalid or expired"}
-
-    if "action" not in json_document:
+    if action not in scopes:
+        return {
+            "statusCode": 403,
+            "body": json.dumps({"error": "insufficient_scope", "scope": action}),
+        }
+    
+    if action == "create":
         complete_document = annotate_new_post(json_document)
-        # we're creating a new post
-
-    elif json_document.get("action") == "update":
-        pass
-        # updating a post
-
-    elif json_document.get("action") == "delete":
-        pass
-        # delete a post
-
-    else:
-        return {"statusCode": 400, "body": "not a supported action"}
-
-    if valid and "create" in scopes:
-
         url = complete_document["properties"]["url"][0]
+        print(complete_document)
         key = urlparse(url).path[1:]  #
         html = document_to_html(complete_document)
         s3.put_object(Bucket=bucket_name, Key=key, Body=html, ContentType="text/html")
 
         return {"statusCode": 201, "headers": {"Location": url}}
-
-    # document, access_token, files = normalize_micropub_post(event)
-    # users = TokenUser(access_token)
-
-    # required_scope = ScopeForOperation[operation]
-
-    # if required_scope in users_scopes:
-    #    url_path = create_document(operation, document)
-    #    url = urljoin(os.environ["MeURL"], url_path)
-    #    print(url)
-
-    #   return {"statusCode": 200, "headers": {"Location": url}}

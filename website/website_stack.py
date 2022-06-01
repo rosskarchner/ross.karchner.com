@@ -18,6 +18,7 @@ from constructs import Construct
 
 from .bucket_file import FileToBucket
 from .micropub import MicropubApi
+from .crawler import S3MicroformatsCrawler
 
 
 class CdnWithDNSAndCert(Construct):
@@ -159,16 +160,22 @@ class WebsiteStack(Stack):
             hosted_zone=hosted_zone,
             domain_names=[domain],
             default_behavior=cloudfront.BehaviorOptions(
-                origin=origins.S3Origin(content_bucket, origin_access_identity=oai),
+                origin=origins.S3Origin(
+                    content_bucket,
+                    origin_access_identity=oai,
+                ),
+                viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             ),
         )
         # Can I do this in one statement?
         cdn.distribution.add_behavior(
-            "/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai)
+            "/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai),
+            viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         )
         cdn.distribution.add_behavior(
             "index.html",
             origins.S3Origin(feed_bucket, origin_access_identity=oai),
+            viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             function_associations=[
                 {
                     "function": cf_function,
@@ -179,3 +186,7 @@ class WebsiteStack(Stack):
 
         feed_bucket.grant_read(oai)
         content_bucket.grant_read(oai)
+
+        crawler = S3MicroformatsCrawler(
+            self, "crawler", bucket=content_bucket, timezone="US/Eastern"
+        )

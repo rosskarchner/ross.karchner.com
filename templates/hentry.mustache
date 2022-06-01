@@ -24,11 +24,15 @@ main {
 h1,h2,h3,h4,h5,h6 {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+figure img {
+  width:100%;
+}
 </style>
 </head>
 <body>
 <main>
-<div class="h-entry {{post_type}}">
+<article class="h-entry {{post_type}}">
  <h1 class="p-name">{{name}}</h1>
 
 {{#summary}}
@@ -48,20 +52,22 @@ A reply to: <a href="{{url}}" class="u-in-reply-to"> {{url}}</a>
  </div>
  {{/content}}
 {{#photos}}
+<div>
   {{#value}}
-    <a href="{{value}}"><img class="u-photo" src="{{value}}" alt="{{alt}}" width="100%"/></a>
+    <a href="{{value}}"><img class="u-photo" src="{{value}}" alt="{{alt}}" style="max-width:100%"/></a>
   {{/value}}
   {{^value}} {{! this means that photos is a list of strings, not a list of dictionaries }}
     <a href="{{.}}"><img class="u-photo" src="{{.}}" width="100%"/></a>
   {{/value}}
+</div>
 {{/photos}}
 
  <div class="metadata">
  {{#author}}
 This {{post_type}} was published by <a href="{{url}}" class="p-author h-card">{{name}}</a>
  {{/author}}
-on <time class="dt-published" datetime="{{published}}">{{published_date_formatted}} at {{published_time_formatted}} ({{timezone}})</time>
- </div>
-</div>
+on <time class="dt-published" datetime="{{published}}">{{published_date_formatted}} at {{published_time_formatted}} ({{timezone}})</time>.
+<a href="{{url}}">🔗</a> </div>
+</article>
 </main>
 </body>
