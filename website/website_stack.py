@@ -188,5 +188,5 @@ class WebsiteStack(Stack):
         content_bucket.grant_read(oai)
 
         crawler = S3MicroformatsCrawler(
-            self, "crawler", bucket=content_bucket, timezone="US/Eastern"
+            self, "CrawlerStack", bucket=content_bucket, timezone="US/Eastern"
         )

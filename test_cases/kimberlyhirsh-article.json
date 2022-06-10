@@ -1,0 +1,187 @@
+{
+    "items": [
+      {
+        "type": [
+          "h-entry"
+        ],
+        "properties": {
+          "name": [
+            "Migrating my site from WordPress to micro.blog"
+          ],
+          "content": [
+            {
+              "html": "<p>I spent my winter vacation migrating my website from WordPress to micro.blog. I thought I’d write a little bit about the process. There’s a help page about doing a <a href=\"https://help.micro.blog/2017/wordpress-import/\">WordPress import</a> and it worked for me exactly as described. I actually managed to accomplish the whole migration using only my phone: I downloaded the WXR file to my phone, uploaded it to micro.blog, and that all worked fine. I pointed my domain to micro.blog, requested SSH (so my domain has https:// in front of it), and <a href=\"https://micro.blog/manton\">@manton</a> got that set up within an hour of my request.</p>\n<p>I made the move because my webhost hasn’t been able to support IndieWeb technologies as much as I would like, but I’ve also found that the webhost I was considering as a replacement might not support all of the IndieWeb features I want, either. So I moved my personal site here to micro.blog. Then, I opened an account with <a href=\"https://reclaimhosting.com/\">Reclaim Hosting</a> and - again, using only my phone - successfully migrated my webhosting over to them. They were able to migrate my entire hosting account. The whole thing was done, including manipulating of various domain names, inside of 4 hours.</p>\n<p>It’s worth noting that in the case of both of these services, most of my tech support emails came directly from the founders of the services. I know that this level of service doesn’t scale, and for many people it would probably be less than ideal to have a founder or CEO handling things like site migrations and secure domain set up. But it felt really good to me - clear that I was communicating with a person who not only had the technical chops to support me, but who believed in their product.</p>\n<p>I’m just beginning my interactions with these services in particular, but they both embrace an ethos that reminds me of my mid-90s technoutopian web developer origins, and it feels good.</p>\n<p>There’s still a bit of work on my end to make everything work just so:</p>\n<ul>\n<li>migrate featured images over from my WordPress installation</li>\n<li>apply the \"research\" category to all of my research-related posts</li>\n<li>decide if I want to apply any other categories</li>\n  </ul>\n<p>This will give me a chance to review all of my old posts.</p>\n<p>I’m excited to be on micro.blog because theme development relies on languages I already know (HTML &amp; CSS).</p>",
+              "value": "I spent my winter vacation migrating my website from WordPress to micro.blog. I thought I’d write a little bit about the process. There’s a help page about doing a WordPress import and it worked for me exactly as described. I actually managed to accomplish the whole migration using only my phone: I downloaded the WXR file to my phone, uploaded it to micro.blog, and that all worked fine. I pointed my domain to micro.blog, requested SSH (so my domain has https:// in front of it), and @manton got that set up within an hour of my request.\nI made the move because my webhost hasn’t been able to support IndieWeb technologies as much as I would like, but I’ve also found that the webhost I was considering as a replacement might not support all of the IndieWeb features I want, either. So I moved my personal site here to micro.blog. Then, I opened an account with Reclaim Hosting and - again, using only my phone - successfully migrated my webhosting over to them. They were able to migrate my entire hosting account. The whole thing was done, including manipulating of various domain names, inside of 4 hours.\nIt’s worth noting that in the case of both of these services, most of my tech support emails came directly from the founders of the services. I know that this level of service doesn’t scale, and for many people it would probably be less than ideal to have a founder or CEO handling things like site migrations and secure domain set up. But it felt really good to me - clear that I was communicating with a person who not only had the technical chops to support me, but who believed in their product.\nI’m just beginning my interactions with these services in particular, but they both embrace an ethos that reminds me of my mid-90s technoutopian web developer origins, and it feels good.\nThere’s still a bit of work on my end to make everything work just so: migrate featured images over from my WordPress installation apply the \"research\" category to all of my research-related posts decide if I want to apply any other categories\nThis will give me a chance to review all of my old posts.\nI’m excited to be on micro.blog because theme development relies on languages I already know (HTML & CSS)."
+            }
+          ],
+          "published": [
+            "2020-01-06T10:46:00-04:00"
+          ],
+          "url": [
+            "https://kimberlyhirsh.com/2020/01/06/migrating-my-site.html"
+          ]
+        }
+      },
+      {
+        "type": [
+          "h-card"
+        ],
+        "properties": {
+          "name": [
+            "Kimberly Hirsh"
+          ],
+          "url": [
+            "https://kimberlyhirsh.com/"
+          ]
+        }
+      }
+    ],
+    "rels": {
+      "me": [
+        "https://micro.blog/KimberlyHirsh",
+        "https://twitter.com/kimberlyhirsh",
+        "https://github.com/kimberlyhirsh",
+        "https://instagram.com/kimberlyhirsh",
+        "https://kimberlyhirsh.com/"
+      ],
+      "authorization_endpoint": [
+        "https://micro.blog/indieauth/auth"
+      ],
+      "token_endpoint": [
+        "https://micro.blog/indieauth/token"
+      ],
+      "micropub": [
+        "https://micro.blog/micropub"
+      ],
+      "microsub": [
+        "https://micro.blog/microsub"
+      ],
+      "webmention": [
+        "https://micro.blog/webmention"
+      ],
+      "subscribe": [
+        "https://micro.blog/users/follow"
+      ],
+      "shortcut": [
+        "https://micro.blog/KimberlyHirsh/favicon.png"
+      ],
+      "icon": [
+        "https://micro.blog/KimberlyHirsh/favicon.png"
+      ],
+      "stylesheet": [
+        "https://kimberlyhirsh.com/css/style.css?0",
+        "https://kimberlyhirsh.com/custom.css?0",
+        "https://kimberlyhirsh.com/assets/css/poststats.css"
+      ],
+      "license": [
+        "http://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "rel-urls": {
+      "https://micro.blog/KimberlyHirsh": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://twitter.com/kimberlyhirsh": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://github.com/kimberlyhirsh": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://instagram.com/kimberlyhirsh": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://micro.blog/indieauth/auth": {
+        "text": "",
+        "rels": [
+          "authorization_endpoint"
+        ]
+      },
+      "https://micro.blog/indieauth/token": {
+        "text": "",
+        "rels": [
+          "token_endpoint"
+        ]
+      },
+      "https://micro.blog/micropub": {
+        "text": "",
+        "rels": [
+          "micropub"
+        ]
+      },
+      "https://micro.blog/microsub": {
+        "text": "",
+        "rels": [
+          "microsub"
+        ]
+      },
+      "https://micro.blog/webmention": {
+        "text": "",
+        "rels": [
+          "webmention"
+        ]
+      },
+      "https://micro.blog/users/follow": {
+        "text": "",
+        "rels": [
+          "subscribe"
+        ]
+      },
+      "https://micro.blog/KimberlyHirsh/favicon.png": {
+        "text": "",
+        "rels": [
+          "icon",
+          "shortcut"
+        ],
+        "type": "image/x-icon"
+      },
+      "https://kimberlyhirsh.com/css/style.css?0": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://kimberlyhirsh.com/custom.css?0": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ],
+        "type": "text/css"
+      },
+      "https://kimberlyhirsh.com/assets/css/poststats.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://kimberlyhirsh.com/": {
+        "text": "Kimberly Hirsh",
+        "rels": [
+          "me"
+        ]
+      },
+      "http://creativecommons.org/licenses/by/4.0/": {
+        "text": "",
+        "rels": [
+          "license"
+        ]
+      }
+    },
+    "debug": {
+      "description": "mf2py - microformats2 parser for python",
+      "source": "https://github.com/microformats/mf2py",
+      "version": "1.1.2",
+      "markup parser": "html5lib"
+    }
+  }

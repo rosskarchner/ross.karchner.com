@@ -1,0 +1,174 @@
+{
+    "items": [
+      {
+        "type": [
+          "h-entry"
+        ],
+        "properties": {
+          "in-reply-to": [
+            {
+              "type": [
+                "h-cite"
+              ],
+              "properties": {
+                "name": [
+                  "@cackhanded’s tweet"
+                ],
+                "url": [
+                  "http://twitter.com/cackhanded/status/215885630784274432"
+                ]
+              },
+              "value": "http://twitter.com/cackhanded/status/215885630784274432"
+            }
+          ],
+          "author": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "url": [
+                  "http://tantek.com/"
+                ],
+                "name": [
+                  "Tantek Çelik"
+                ],
+                "photo": [
+                  "http://tantek.com/logo.jpg"
+                ]
+              },
+              "value": "Tantek Çelik"
+            }
+          ],
+          "name": [
+            "@cackhanded asks \"What’s the opposite [to POSSE]?\" How about PESOS: Publish Elsewhere, Syndicate into Own Site? re: tantek.com/2012/173/t1/posse-core-indieweb-approach in-reply-to: twitter.com/cackhanded/status/215885630784274432"
+          ],
+          "content": [
+            {
+              "html": "<a class=\"auto-link h-cassis-username\" href=\"https://twitter.com/cackhanded\">@cackhanded</a> asks \"What’s the opposite [to POSSE]?\" How about PESOS: Publish Elsewhere, Syndicate into Own Site? re: <a class=\"auto-link\" href=\"http://tantek.com/2012/173/t1/posse-core-indieweb-approach\">tantek.com/2012/173/t1/posse-core-indieweb-approach</a> in-reply-to: <a class=\"auto-link\" href=\"http://twitter.com/cackhanded/status/215885630784274432\">twitter.com/cackhanded/status/215885630784274432</a>",
+              "value": "@cackhanded asks \"What’s the opposite [to POSSE]?\" How about PESOS: Publish Elsewhere, Syndicate into Own Site? re: tantek.com/2012/173/t1/posse-core-indieweb-approach in-reply-to: twitter.com/cackhanded/status/215885630784274432"
+            }
+          ],
+          "published": [
+            "2012-06-22 10:59-0700"
+          ],
+          "updated": [
+            "2012-06-22 10:59-0700"
+          ],
+          "uid": [
+            "https://tantek.com/2012/174/t2/opposite-posse-pesos-publish-elsewhere"
+          ],
+          "url": [
+            "https://tantek.com/2012/174/t2/opposite-posse-pesos-publish-elsewhere"
+          ],
+          "syndication": [
+            "http://twitter.com/t/status/216229229728243712"
+          ]
+        },
+        "children": [
+          {
+            "type": [
+              "h-cassis-username"
+            ],
+            "properties": {
+              "name": [
+                "@cackhanded"
+              ],
+              "url": [
+                "https://twitter.com/cackhanded"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "rels": {
+      "canonical": [
+        "https://tantek.com/2012/174/t2/opposite-posse-pesos-publish-elsewhere"
+      ],
+      "icon": [
+        "http://tantek.com/logo.jpg"
+      ],
+      "webmention": [
+        "http://webmention.io/tantek.com/webmention"
+      ],
+      "author": [
+        "http://tantek.com/"
+      ],
+      "home": [
+        "http://tantek.com/"
+      ],
+      "prev": [
+        "http://tantek.com/2012/174/t1/interview-pubsubhubbub-federation-engagement-indieweb"
+      ],
+      "next": [
+        "http://tantek.com/2012/176/t1/states-dole-vote-republican-imagine-self-reliant"
+      ],
+      "in-reply-to": [
+        "http://twitter.com/cackhanded/status/215885630784274432"
+      ],
+      "syndication": [
+        "http://twitter.com/t/status/216229229728243712"
+      ]
+    },
+    "rel-urls": {
+      "https://tantek.com/2012/174/t2/opposite-posse-pesos-publish-elsewhere": {
+        "text": "",
+        "rels": [
+          "canonical"
+        ]
+      },
+      "http://tantek.com/logo.jpg": {
+        "text": "",
+        "rels": [
+          "icon"
+        ]
+      },
+      "http://webmention.io/tantek.com/webmention": {
+        "text": "",
+        "rels": [
+          "webmention"
+        ]
+      },
+      "http://tantek.com/": {
+        "text": "tantek.com",
+        "rels": [
+          "author",
+          "home"
+        ],
+        "title": "Tantek Çelik"
+      },
+      "http://tantek.com/2012/174/t1/interview-pubsubhubbub-federation-engagement-indieweb": {
+        "text": "←",
+        "rels": [
+          "prev"
+        ],
+        "title": "View the previous (older) item in the stream."
+      },
+      "http://tantek.com/2012/176/t1/states-dole-vote-republican-imagine-self-reliant": {
+        "text": "→",
+        "rels": [
+          "next"
+        ],
+        "title": "View the next (newer) item in the stream"
+      },
+      "http://twitter.com/cackhanded/status/215885630784274432": {
+        "text": "@cackhanded’s tweet",
+        "rels": [
+          "in-reply-to"
+        ]
+      },
+      "http://twitter.com/t/status/216229229728243712": {
+        "text": "View \n      Conversation\n      on Twitter",
+        "rels": [
+          "syndication"
+        ]
+      }
+    },
+    "debug": {
+      "description": "mf2py - microformats2 parser for python",
+      "source": "https://github.com/microformats/mf2py",
+      "version": "1.1.2",
+      "markup parser": "html5lib"
+    }
+  }

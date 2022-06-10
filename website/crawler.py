@@ -1,12 +1,13 @@
 from constructs import Construct
 from aws_cdk import Duration
-from aws_cdk import cloudformation_include as cfn_inc
+from aws_cdk import Stack
 from aws_cdk import aws_s3 as s3
 from aws_cdk import aws_dynamodb as dynamodb
-from aws_solutions_constructs.aws_s3_sqs import S3ToSqs
-from aws_solutions_constructs.aws_sqs_lambda import SqsToLambda
 from aws_cdk import aws_lambda as lambda_
 from aws_cdk import aws_lambda_python_alpha as lambda_python
+from aws_solutions_constructs.aws_s3_sqs import S3ToSqs
+from aws_solutions_constructs.aws_sqs_lambda import SqsToLambda
+
 
 PYTHON_RUNTIME = lambda_.Runtime.PYTHON_3_9
 
@@ -21,7 +22,7 @@ class S3MicroformatsCrawler(Construct):
         date_format="%A, %B %-d",
         time_format="%-I:%-M %p",
         **kwargs
-    ):
+    ) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
         self.table = dynamodb.Table(
@@ -41,12 +42,12 @@ class S3MicroformatsCrawler(Construct):
             index_name="LSI1",
         )
 
-        self.s3_to_sqs = S3ToSqs(
+        self.s3_to_sqs = S3ToSqs(   
             self,
             "BucketEventsToCrawlerQueue",
             existing_bucket_obj=bucket,
             s3_event_filters=[{"suffix": "html"}],
-            s3_event_types=[s3.EventType.OBJECT_CREATED, s3.EventType.OBJECT_REMOVED],
+           s3_event_types=[s3.EventType.OBJECT_CREATED, s3.EventType.OBJECT_REMOVED],
         )
 
         self.crawl_function = lambda_python.PythonFunction(
@@ -66,7 +67,7 @@ class S3MicroformatsCrawler(Construct):
 
         self.sqs_to_lambda = SqsToLambda(
             self,
-            "ProcessCrawlerQueue",
+            "ProcessCrawlerSqsToLambda",
             existing_lambda_obj=self.crawl_function,
             existing_queue_obj=self.s3_to_sqs.sqs_queue,
         )

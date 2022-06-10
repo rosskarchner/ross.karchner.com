@@ -1,0 +1,177 @@
+{
+    "items": [
+      {
+        "type": [
+          "h-entry"
+        ],
+        "properties": {
+          "name": [
+            "Micro.blog 2.5 for Mac with replies, bookshelves"
+          ],
+          "published": [
+            "2022-05-31 09:41:07-0500"
+          ],
+          "url": [
+            "https://www.manton.org/2022/05/31/microblog-for-mac.html"
+          ],
+          "content": [
+            {
+              "html": "<p>We shipped version 2.5 of Micro.blog for macOS today. I had originally intended to just add a new Replies section of the app for this version, but it looked kind of lonely by itself, so I added Bookshelves too, with a multi-window interface for managing books you want to read or blog about. This uses our existing JSON Feed-based API for books data.</p>\n<p>Here’s a screenshot of my bookshelves:</p>\n<p><a href=\"https://www.manton.org/uploads/2022/37fb191253.png\"><img alt=\"Screenshot of book windows in Micro.blog for Mac\" height=\"439\" src=\"https://www.manton.org/uploads/2022/37fb191253.png\" style=\"max-width: 600px;\" width=\"600\"/></a></p>\n<p>You can download the latest version <a href=\"https://help.micro.blog/t/micro-blog-for-mac/45\">from the help page</a> or choose “Check for Updates” from within the app.</p>\n<p>If you’re puzzled by why Micro.blog has all these book-related features… We have a lot of members of our community who love to read and write. If it’s easier to blog about books you’re reading, we can eventually build a distributed, web-scale alternative to Amazon-owned Goodreads. This won’t happen overnight. It’s a years-long goal and just one of many facets of the IndieWeb that we’re interested in.</p>\n<p>Books are also great for mental health and thoughtful commentary, broadening our understanding of other perspectives, which maybe the world could use right now.</p>",
+              "value": "We shipped version 2.5 of Micro.blog for macOS today. I had originally intended to just add a new Replies section of the app for this version, but it looked kind of lonely by itself, so I added Bookshelves too, with a multi-window interface for managing books you want to read or blog about. This uses our existing JSON Feed-based API for books data.\nHere’s a screenshot of my bookshelves:\nScreenshot of book windows in Micro.blog for Mac\nYou can download the latest version from the help page or choose “Check for Updates” from within the app.\nIf you’re puzzled by why Micro.blog has all these book-related features… We have a lot of members of our community who love to read and write. If it’s easier to blog about books you’re reading, we can eventually build a distributed, web-scale alternative to Amazon-owned Goodreads. This won’t happen overnight. It’s a years-long goal and just one of many facets of the IndieWeb that we’re interested in.\nBooks are also great for mental health and thoughtful commentary, broadening our understanding of other perspectives, which maybe the world could use right now."
+            }
+          ],
+          "author": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "url": [
+                  "https://www.manton.org/",
+                  "https://www.manton.org/"
+                ],
+                "photo": [
+                  "https://micro.blog/manton/avatar.jpg"
+                ],
+                "name": [
+                  "Manton Reece"
+                ]
+              },
+              "value": "Manton Reece"
+            }
+          ]
+        }
+      }
+    ],
+    "rels": {
+      "stylesheet": [
+        "https://www.manton.org/assets/css/style.css?1654014731",
+        "https://www.manton.org/assets/css/highlight.css?1654014731",
+        "https://www.manton.org/custom.css?1654014731",
+        "https://www.manton.org/dark.css"
+      ],
+      "shortcut": [
+        "https://micro.blog/manton/favicon.png"
+      ],
+      "icon": [
+        "https://micro.blog/manton/favicon.png"
+      ],
+      "me": [
+        "https://micro.blog/manton",
+        "https://twitter.com/mantonsblog",
+        "https://github.com/manton"
+      ],
+      "authorization_endpoint": [
+        "https://micro.blog/indieauth/auth"
+      ],
+      "token_endpoint": [
+        "https://micro.blog/indieauth/token"
+      ],
+      "micropub": [
+        "https://micro.blog/micropub"
+      ],
+      "microsub": [
+        "https://micro.blog/microsub"
+      ],
+      "webmention": [
+        "https://micro.blog/webmention"
+      ],
+      "subscribe": [
+        "https://micro.blog/users/follow"
+      ]
+    },
+    "rel-urls": {
+      "https://www.manton.org/assets/css/style.css?1654014731": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://www.manton.org/assets/css/highlight.css?1654014731": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://www.manton.org/custom.css?1654014731": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://micro.blog/manton/favicon.png": {
+        "text": "",
+        "rels": [
+          "icon",
+          "shortcut"
+        ],
+        "type": "image/x-icon"
+      },
+      "https://micro.blog/manton": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://twitter.com/mantonsblog": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://github.com/manton": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://micro.blog/indieauth/auth": {
+        "text": "",
+        "rels": [
+          "authorization_endpoint"
+        ]
+      },
+      "https://micro.blog/indieauth/token": {
+        "text": "",
+        "rels": [
+          "token_endpoint"
+        ]
+      },
+      "https://micro.blog/micropub": {
+        "text": "",
+        "rels": [
+          "micropub"
+        ]
+      },
+      "https://micro.blog/microsub": {
+        "text": "",
+        "rels": [
+          "microsub"
+        ]
+      },
+      "https://micro.blog/webmention": {
+        "text": "",
+        "rels": [
+          "webmention"
+        ]
+      },
+      "https://micro.blog/users/follow": {
+        "text": "",
+        "rels": [
+          "subscribe"
+        ]
+      },
+      "https://www.manton.org/dark.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      }
+    },
+    "debug": {
+      "description": "mf2py - microformats2 parser for python",
+      "source": "https://github.com/microformats/mf2py",
+      "version": "1.1.2",
+      "markup parser": "html5lib"
+    }
+  }

@@ -1,0 +1,546 @@
+{
+    "items": [
+      {
+        "type": [
+          "h-entry"
+        ],
+        "properties": {
+          "in-reply-to": [
+            "http://www.bradryanbice.com/2013/03/i-launched-a-new-look-and-feel-today-and-im-tweeting-from-wordpress/"
+          ],
+          "author": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "url": [
+                  "https://aaronparecki.com/"
+                ],
+                "name": [
+                  "Aaron Parecki"
+                ],
+                "photo": [
+                  "https://aaronparecki.com/images/profile.jpg"
+                ]
+              },
+              "value": "https://aaronparecki.com/"
+            }
+          ],
+          "content": [
+            {
+              "html": "<a href=\"https://twitter.com/bradryanbice\">@bradryanbice</a> Congrats on tweeting from Wordpress! You should check out <a href=\"http://indiewebcamp.com\"><span class=\"protocol\">http://</span>indiewebcamp.com</a> - we'd love to have you participate!",
+              "value": "@bradryanbice Congrats on tweeting from Wordpress! You should check out http://indiewebcamp.com - we'd love to have you participate!"
+            }
+          ],
+          "location": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "name": [
+                  "Portland, OR, USA"
+                ]
+              },
+              "value": "Portland, OR, USA"
+            }
+          ],
+          "category": [
+            "indieweb",
+            "indiewebcamp"
+          ],
+          "url": [
+            "https://aaronparecki.com/2013/03/19/2/indiewebcamp"
+          ],
+          "published": [
+            "2013-03-19T13:18:38-07:00"
+          ],
+          "syndication": [
+            "https://twitter.com/aaronpk/status/321983471838973952"
+          ]
+        }
+      },
+      {
+        "type": [
+          "h-card"
+        ],
+        "properties": {
+          "uid": [
+            "https://aaronparecki.com/"
+          ],
+          "url": [
+            "https://aaronparecki.com/"
+          ],
+          "photo": [
+            "https://aaronparecki.com/images/profile.jpg"
+          ],
+          "note": [
+            "Hi, I'm Aaron Parecki, co-founder of IndieWebCamp. I maintain oauth.net, write and consult about OAuth, and am the editor of several W3C specifications. I help people learn about video production and livestreaming and dabble in product design.\nI've been tracking my location since 2008 and I wrote 100 songs in 100 days. I've spoken at conferences around the world about owning your data, OAuth, quantified self, and explained why R is a vowel. Read more."
+          ],
+          "name": [
+            "Aaron Parecki"
+          ],
+          "org": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "name": [
+                  "IndieWebCamp"
+                ],
+                "url": [
+                  "https://indieweb.org/"
+                ]
+              },
+              "value": "IndieWebCamp"
+            },
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "name": [
+                  "oauth.net"
+                ],
+                "url": [
+                  "https://oauth.net/"
+                ]
+              },
+              "value": "oauth.net"
+            },
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "photo": [
+                  "https://aaronparecki.com/images/okta.png"
+                ],
+                "role": [
+                  "Security Architect"
+                ],
+                "url": [
+                  "https://developer.okta.com/"
+                ],
+                "name": [
+                  "Okta"
+                ]
+              },
+              "value": "Okta"
+            },
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "photo": [
+                  "https://aaronparecki.com/images/indiewebcamp.png"
+                ],
+                "url": [
+                  "https://indieweb.org/"
+                ],
+                "name": [
+                  "IndieWebCamp"
+                ],
+                "role": [
+                  "Founder"
+                ]
+              },
+              "value": "IndieWebCamp"
+            },
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "photo": [
+                  "https://aaronparecki.com/images/ietf.ico"
+                ],
+                "url": [
+                  "https://oauth.net"
+                ],
+                "name": [
+                  "OAuth WG"
+                ],
+                "role": [
+                  "Member"
+                ]
+              },
+              "value": "OAuth WG"
+            }
+          ],
+          "bday": [
+            "--12-28"
+          ],
+          "street-address": [
+            "818 SW 3rd Ave #437"
+          ],
+          "locality": [
+            "Portland"
+          ],
+          "region": [
+            "Oregon"
+          ],
+          "country-name": [
+            "USA"
+          ],
+          "postal-code": [
+            "97204"
+          ]
+        }
+      }
+    ],
+    "rels": {
+      "alternate": [
+        "https://aaronparecki.com/2013/03/19/2/indiewebcamp.json",
+        "https://aaronparecki.com/2013/03/19/2/indiewebcamp.jf2",
+        "https://aaronparecki.com/2013/03/19/2/indiewebcamp.as2"
+      ],
+      "webmention": [
+        "https://webmention.io/aaronpk/webmention"
+      ],
+      "stylesheet": [
+        "https://aaronparecki.com/assets/font.css",
+        "https://aaronparecki.com/semantic/2.2.6/semantic.min.css",
+        "https://aaronparecki.com/assets/icomoon/style.css",
+        "https://aaronparecki.com/assets/weather-icons/css/weather-icons.css",
+        "https://aaronparecki.com/assets/featherlight-1.5.0/featherlight.min.css",
+        "https://aaronparecki.com/assets/admin.2.css",
+        "https://aaronparecki.com/assets/pulse.css",
+        "https://aaronparecki.com/assets/styles.8.css",
+        "https://aaronparecki.com/site/styles.2.css",
+        "https://aaronparecki.com/assets/carbon.css",
+        "https://aaronparecki.com/assets/story.css"
+      ],
+      "openid.delegate": [
+        "https://aaronparecki.com/"
+      ],
+      "openid.server": [
+        "https://openid.indieauth.com/openid"
+      ],
+      "pgpkey": [
+        "https://aaronparecki.com/key.txt"
+      ],
+      "me": [
+        "sms:+15035678642",
+        "https://micro.blog/aaronpk"
+      ],
+      "": [
+        "https://twitter.com/aaronpk",
+        "https://youtube.com/aaronpk",
+        "https://github.com/aaronpk",
+        "http://foursquare.com/aaronpk",
+        "http://www.linkedin.com/in/aaronparecki",
+        "https://instagram.com/aaronpk_tv",
+        "https://instagram.com/aaronpk_2d",
+        "http://flickr.com/aaronpk",
+        "https://speakerdeck.com/aaronpk",
+        "http://www.slideshare.net/aaronpk",
+        "http://www.last.fm/user/aaron_pk",
+        "https://kit.co/aaronpk",
+        "https://www.duolingo.com/profile/aaronpk",
+        "https://www.w3.org/users/59996",
+        "https://u.wechat.com/kKChiO-sSbgJQFf0UJrpHhE",
+        "https://www.amazon.com/shop/aaronparecki",
+        "https://www.amazon.com/gp/profile/amzn1.account.AHJ2OJ7NXSYM23FDDEDVZV2UR4MA",
+        "https://aaronparecki.com/aaronpk",
+        "https://cash.me/$aaronpk",
+        "https://venmo.com/aaronpk",
+        "https://paypal.me/apk",
+        "mailto:aaron@parecki.com"
+      ],
+      "license": [
+        "http://creativecommons.org/licenses/by/3.0/"
+      ]
+    },
+    "rel-urls": {
+      "https://aaronparecki.com/2013/03/19/2/indiewebcamp.json": {
+        "text": "",
+        "rels": [
+          "alternate"
+        ],
+        "type": "application/mf2+json"
+      },
+      "https://aaronparecki.com/2013/03/19/2/indiewebcamp.jf2": {
+        "text": "",
+        "rels": [
+          "alternate"
+        ],
+        "type": "application/jf2+json"
+      },
+      "https://aaronparecki.com/2013/03/19/2/indiewebcamp.as2": {
+        "text": "",
+        "rels": [
+          "alternate"
+        ],
+        "type": "application/activity+json"
+      },
+      "https://webmention.io/aaronpk/webmention": {
+        "text": "",
+        "rels": [
+          "webmention"
+        ]
+      },
+      "https://aaronparecki.com/assets/font.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ],
+        "type": "text/css"
+      },
+      "https://aaronparecki.com/semantic/2.2.6/semantic.min.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ],
+        "type": "text/css"
+      },
+      "https://aaronparecki.com/assets/icomoon/style.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/weather-icons/css/weather-icons.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/featherlight-1.5.0/featherlight.min.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/admin.2.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/pulse.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/styles.8.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/site/styles.2.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/carbon.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/assets/story.css": {
+        "text": "",
+        "rels": [
+          "stylesheet"
+        ]
+      },
+      "https://aaronparecki.com/": {
+        "text": "",
+        "rels": [
+          "openid.delegate"
+        ]
+      },
+      "https://openid.indieauth.com/openid": {
+        "text": "",
+        "rels": [
+          "openid.server"
+        ]
+      },
+      "https://aaronparecki.com/key.txt": {
+        "text": "",
+        "rels": [
+          "pgpkey"
+        ]
+      },
+      "sms:+15035678642": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://micro.blog/aaronpk": {
+        "text": "",
+        "rels": [
+          "me"
+        ]
+      },
+      "https://twitter.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://youtube.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://github.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://foursquare.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://www.linkedin.com/in/aaronparecki": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://instagram.com/aaronpk_tv": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://instagram.com/aaronpk_2d": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://flickr.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://speakerdeck.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://www.slideshare.net/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://www.last.fm/user/aaron_pk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://kit.co/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://www.duolingo.com/profile/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://www.w3.org/users/59996": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://u.wechat.com/kKChiO-sSbgJQFf0UJrpHhE": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://www.amazon.com/shop/aaronparecki": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://www.amazon.com/gp/profile/amzn1.account.AHJ2OJ7NXSYM23FDDEDVZV2UR4MA": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://aaronparecki.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://cash.me/$aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://venmo.com/aaronpk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "https://paypal.me/apk": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "mailto:aaron@parecki.com": {
+        "text": "",
+        "rels": [
+          ""
+        ]
+      },
+      "http://creativecommons.org/licenses/by/3.0/": {
+        "text": "Creative Commons Attribution 3.0 License",
+        "rels": [
+          "license"
+        ]
+      }
+    },
+    "debug": {
+      "description": "mf2py - microformats2 parser for python",
+      "source": "https://github.com/microformats/mf2py",
+      "version": "1.1.2",
+      "markup parser": "html5lib"
+    },
+    "alternates": [
+      {
+        "url": "https://aaronparecki.com/2013/03/19/2/indiewebcamp.json",
+        "text": "",
+        "type": "application/mf2+json"
+      },
+      {
+        "url": "https://aaronparecki.com/2013/03/19/2/indiewebcamp.jf2",
+        "text": "",
+        "type": "application/jf2+json"
+      },
+      {
+        "url": "https://aaronparecki.com/2013/03/19/2/indiewebcamp.as2",
+        "text": "",
+        "type": "application/activity+json"
+      }
+    ]
+  }

@@ -1,0 +1,156 @@
+{
+    "items": [
+      {
+        "type": [
+          "h-entry"
+        ],
+        "properties": {
+          "author": [
+            {
+              "type": [
+                "h-card"
+              ],
+              "properties": {
+                "url": [
+                  "http://tantek.com/"
+                ],
+                "name": [
+                  "Tantek Çelik"
+                ],
+                "photo": [
+                  "http://tantek.com/logo.jpg"
+                ]
+              },
+              "value": "Tantek Çelik"
+            }
+          ],
+          "name": [
+            "Ran my 10th #BayToBreakers in 1:38:32 on Sunday, apparently 3 seconds faster than the most recent in 2019, again the day after an @SFRunCo Saturday trail #run, and a double-day Friday.\n\n#2022_135 #SanFrancisco #runner \n\n2019: https://tantek.com/2019/139/t1/ran-baytobreakers"
+          ],
+          "content": [
+            {
+              "html": "Ran my 10th #<span class=\"p-category auto-tag\">BayToBreakers</span> in 1:38:32 on Sunday, apparently 3 seconds faster than the most recent in 2019, again the day after an <a class=\"auto-link h-cassis-username\" href=\"https://twitter.com/SFRunCo\">@SFRunCo</a> Saturday trail #<span class=\"p-category auto-tag\">run</span>, and a double-day Friday.<br class=\"auto-break\"/><br class=\"auto-break\"/>#<span class=\"p-category auto-tag\">2022_135</span> #<span class=\"p-category auto-tag\">SanFrancisco</span> #<span class=\"p-category auto-tag\">runner</span> <br class=\"auto-break\"/><br class=\"auto-break\"/>2019: <a class=\"auto-link\" href=\"https://tantek.com/2019/139/t1/ran-baytobreakers\">https://tantek.com/2019/139/t1/ran-baytobreakers</a>",
+              "value": "Ran my 10th #BayToBreakers in 1:38:32 on Sunday, apparently 3 seconds faster than the most recent in 2019, again the day after an @SFRunCo Saturday trail #run, and a double-day Friday.\n\n#2022_135 #SanFrancisco #runner \n\n2019: https://tantek.com/2019/139/t1/ran-baytobreakers"
+            }
+          ],
+          "category": [
+            "BayToBreakers",
+            "run",
+            "2022_135",
+            "SanFrancisco",
+            "runner"
+          ],
+          "updated": [
+            "2022-05-18 17:02-0700"
+          ],
+          "published": [
+            "2022-05-18 17:02-0700"
+          ],
+          "url": [
+            "https://tantek.com/2022/138/t1/ran-baytobreakers"
+          ],
+          "uid": [
+            "https://tantek.com/2022/138/t1/ran-baytobreakers"
+          ],
+          "syndication": [
+            "https://twitter.com/t/status/1527083324295983104"
+          ]
+        },
+        "children": [
+          {
+            "type": [
+              "h-cassis-username"
+            ],
+            "properties": {
+              "name": [
+                "@SFRunCo"
+              ],
+              "url": [
+                "https://twitter.com/SFRunCo"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "rels": {
+      "canonical": [
+        "https://tantek.com/2022/138/t1/ran-baytobreakers"
+      ],
+      "icon": [
+        "http://tantek.com/logo.jpg"
+      ],
+      "webmention": [
+        "http://webmention.io/tantek.com/webmention"
+      ],
+      "author": [
+        "http://tantek.com/"
+      ],
+      "home": [
+        "http://tantek.com/"
+      ],
+      "prev": [
+        "http://tantek.com/2022/124/t1/may-the-4th"
+      ],
+      "next": [
+        "http://tantek.com/2022/144/t1/redirected-github-ownyourlinks"
+      ],
+      "syndication": [
+        "https://twitter.com/t/status/1527083324295983104"
+      ]
+    },
+    "rel-urls": {
+      "https://tantek.com/2022/138/t1/ran-baytobreakers": {
+        "text": "",
+        "rels": [
+          "canonical"
+        ]
+      },
+      "http://tantek.com/logo.jpg": {
+        "text": "",
+        "rels": [
+          "icon"
+        ]
+      },
+      "http://webmention.io/tantek.com/webmention": {
+        "text": "",
+        "rels": [
+          "webmention"
+        ]
+      },
+      "http://tantek.com/": {
+        "text": "tantek.com",
+        "rels": [
+          "author",
+          "home"
+        ],
+        "title": "Tantek Çelik"
+      },
+      "http://tantek.com/2022/124/t1/may-the-4th": {
+        "text": "←",
+        "rels": [
+          "prev"
+        ],
+        "title": "View the previous (older) item in the stream."
+      },
+      "http://tantek.com/2022/144/t1/redirected-github-ownyourlinks": {
+        "text": "→",
+        "rels": [
+          "next"
+        ],
+        "title": "View the next (newer) item in the stream"
+      },
+      "https://twitter.com/t/status/1527083324295983104": {
+        "text": "View \n      on Twitter",
+        "rels": [
+          "syndication"
+        ]
+      }
+    },
+    "debug": {
+      "description": "mf2py - microformats2 parser for python",
+      "source": "https://github.com/microformats/mf2py",
+      "version": "1.1.2",
+      "markup parser": "html5lib"
+    }
+  }
