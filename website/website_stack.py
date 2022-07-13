@@ -17,8 +17,7 @@ from aws_cdk.aws_apigatewayv2_integrations_alpha import HttpUrlIntegration
 from constructs import Construct
 
 from .bucket_file import FileToBucket
-from .micropub import MicropubApi
-from .crawler import S3MicroformatsCrawler
+
 
 
 class CdnWithDNSAndCert(Construct):
@@ -77,53 +76,50 @@ class WebsiteStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, domain, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
-        feed_bucket = s3.Bucket(self, "FeedsBucket")
-        content_bucket = s3.Bucket(self, "PostsBucket")
+        site_bucket = s3.Bucket(self, "SiteBucket")
 
         hosted_zone = route53.HostedZone.from_lookup(self, "Zone", domain_name=domain)
 
-        template_bundle = Asset(self, "MicropubTemplateBundle", path="templates")
+        #indieauth_token_authorizer_function = lambda_python.PythonFunction(
+        #    self,
+        #    "IndieAuthTokenAuthorizerFunction",
+        #    entry="function_code/authorize",
+        #    handler="lambda_handler",
+        #    runtime=lambda_.Runtime.PYTHON_3_9,
+        #    timeout=Duration.seconds(20),
+        #    environment={
+        #        "UPSTREAM_TOKEN_ENDPOINT": "https://tokens.indieauth.com/token",
+        #        "ME_URL": "https://" + domain + "/",
+        #    },
+        #)
 
-        indieauth_token_authorizer_function = lambda_python.PythonFunction(
-            self,
-            "IndieAuthTokenAuthorizerFunction",
-            entry="function_code/authorize",
-            handler="lambda_handler",
-            runtime=lambda_.Runtime.PYTHON_3_9,
-            timeout=Duration.seconds(20),
-            environment={
-                "UPSTREAM_TOKEN_ENDPOINT": "https://tokens.indieauth.com/token",
-                "ME_URL": "https://" + domain + "/",
-            },
-        )
+ #       authorizer = HttpLambdaAuthorizer(
+ #           "IndieAuthTokenAuthorizer",
+ #           indieauth_token_authorizer_function,
+ #           response_types=[HttpLambdaResponseType.SIMPLE],
+ #           identity_source=["$request.header.Authorization"],
+ #           results_cache_ttl=Duration.minutes(10),
+ #       )
 
-        authorizer = HttpLambdaAuthorizer(
-            "IndieAuthTokenAuthorizer",
-            indieauth_token_authorizer_function,
-            response_types=[HttpLambdaResponseType.SIMPLE],
-            identity_source=["$request.header.Authorization"],
-            results_cache_ttl=Duration.minutes(10),
-        )
-
-        index_html = FileToBucket(
+        FileToBucket(
             self,
             "IndexHtml",
-            feed_bucket.bucket_name,
+            site_bucket.bucket_name,
             file_name="index.html",
             file_contents=open("placeholder.html").read(),
         )
 
-        micropub = MicropubApi(
-            self,
-            "micropub",
-            timezone="US/Eastern",
-            bucket=content_bucket,
-            template_bundle=template_bundle,
-            token_endpoint="https://tokens.indieauth.com/token",
-            me_url="https://" + domain + "/",
-            author_name="Ross M Karchner",
-            authorizer=authorizer,
-        )
+     #   micropub = MicropubApi(
+     #       self,
+     #       "micropub",
+     #       timezone="US/Eastern",
+     #       bucket=content_bucket,
+     #       template_bundle=template_bundle,
+     #       token_endpoint="https://tokens.indieauth.com/token",
+     #       me_url="https://" + domain + "/",
+     #       author_name="Ross M Karchner",
+     #       authorizer=authorizer,
+     #   )
 
         cf_function_code = """
         function handler(event) {
@@ -145,7 +141,7 @@ class WebsiteStack(Stack):
             return response;
         }
         """ % (
-            micropub.api.url
+            "https://fake.api.url/"
         )
 
         cf_function = cloudfront.Function(
@@ -161,7 +157,7 @@ class WebsiteStack(Stack):
             domain_names=[domain],
             default_behavior=cloudfront.BehaviorOptions(
                 origin=origins.S3Origin(
-                    content_bucket,
+                    site_bucket,
                     origin_access_identity=oai,
                 ),
                 viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -169,12 +165,8 @@ class WebsiteStack(Stack):
         )
         # Can I do this in one statement?
         cdn.distribution.add_behavior(
-            "/feeds/*", origins.S3Origin(feed_bucket, origin_access_identity=oai),
-            viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        )
-        cdn.distribution.add_behavior(
             "index.html",
-            origins.S3Origin(feed_bucket, origin_access_identity=oai),
+            origins.S3Origin(site_bucket, origin_access_identity=oai),
             viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
             function_associations=[
                 {
@@ -184,9 +176,4 @@ class WebsiteStack(Stack):
             ],
         )
 
-        feed_bucket.grant_read(oai)
-        content_bucket.grant_read(oai)
-
-        crawler = S3MicroformatsCrawler(
-            self, "CrawlerStack", bucket=content_bucket, timezone="US/Eastern"
-        )
+        site_bucket.grant_read(oai)
