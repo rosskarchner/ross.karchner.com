@@ -7,4 +7,4 @@ source_url: "https://rossk.micro.blog/2024/04/11/working-on-a.html"
 
 Working on a Godot recreation of [Pong Wars](https://pong-wars.koenvangilst.nl/). I might write this up as a tutorial?
 
-<img src="/uploads/2024/pongwars.gif" width="563" height="600" alt="">
+<video src="/uploads/2024/pongwars.mp4" width="563" height="600" controls preload="metadata" loop muted playsinline></video>

@@ -120,11 +120,26 @@ Everything else — 305 files, ~433 MB — is committed under `static/uploads/`.
 One of them, `static/uploads/2025/screencast-from-2025-02-22-22-40-54.mp4`
 (53 MB), is over GitHub's 50 MB warning threshold but under the 100 MB limit.
 
-The archive's screen-capture GIFs are enormous — twelve of them come to about
-218 MB. Two have h264 versions alongside them (`brakes.mp4`,
-`crushed-1016.mp4`, ~95% smaller) and the pages that showed them now embed
-those instead. The originals are kept so their URLs don't break. Converting the
-rest is the single biggest win still available:
+## The GIF originals
+
+The archive's twelve screen-capture GIFs came to 218 MB — half the repository.
+They're now h264 instead (18 MB, same frame counts), and the posts that showed
+them embed the `.mp4` alongside each one. Four tiny sprite GIFs, all under
+5 KB, were left alone.
+
+The originals are **not in this repository or its history**. They live in a
+private S3 bucket, at the same paths they had on the site:
+
+```
+s3://ross-karchner-com-media-archive/uploads/2023/roguelike.gif
+aws s3 ls s3://ross-karchner-com-media-archive/uploads/ --recursive
+```
+
+Nothing on the site links to them, so the bucket is a cold archive — versioned
+and encrypted, with public access blocked. To restore one, `aws s3 cp` it back
+into `static/uploads/`.
+
+To convert another GIF:
 
 ```sh
 ffmpeg -i in.gif -movflags +faststart -pix_fmt yuv420p \

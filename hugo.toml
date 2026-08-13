@@ -21,7 +21,7 @@ timeZone = "America/New_York"
   tag = "tags"
 
 [params]
-  description = "Software, side projects, and games in progress."
+  description = "devops + cybersecurity professional and gamedev amateur"
   author = "Ross Karchner"
   # Shown in the footer, and used for rel=me verification.
   [[params.links]]

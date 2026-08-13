@@ -15,7 +15,7 @@ New stuff:
 - (but you can die too)
 - A user interface that let's you make sense of what's happening.
 
-<img src="/uploads/2023/roguelike-7.gif" width="600" height="355" alt="a dungeon crawling game">
+<video src="/uploads/2023/roguelike-7.mp4" width="600" height="355" aria-label="a dungeon crawling game" controls preload="metadata" loop muted playsinline></video>
 
 I like how the author sets up the UI, I've learned some neat tricks there. I was a little fuzzy on the vim-like modal input system before this latest part, it clicked when adding the ability to scroll back through the message log.
 

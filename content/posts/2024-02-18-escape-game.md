@@ -14,4 +14,4 @@ It's going better, but I'm not sure it'll be shippable by the deadline (4pm tomo
 
 
 
-<img src="/uploads/2024/gwj66.gif" width="600" height="363" alt="">
+<video src="/uploads/2024/gwj66.mp4" width="600" height="363" controls preload="metadata" loop muted playsinline></video>

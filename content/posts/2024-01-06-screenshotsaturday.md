@@ -7,7 +7,7 @@ tags:
 source_url: "https://rossk.micro.blog/2024/01/06/screenshotsaturday.html"
 ---
 
-<img src="/uploads/2024/part10.gif" width="600" height="336" alt="dungeon-crawling game in progress">
+<video src="/uploads/2024/part10.mp4" width="600" height="336" aria-label="dungeon-crawling game in progress" controls preload="metadata" loop muted playsinline></video>
 
 I'm up to [Part 10](https://selinadev.github.io/14-rogueliketutorial-10/) of [@selinadev@indiepocalypse.social](https://micro.blog/selinadev@indiepocalypse.social)'s Godot 4 Roguelike tutorial. What's new?
 
