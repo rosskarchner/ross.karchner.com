@@ -25,11 +25,12 @@ timeZone = "America/New_York"
   author = "Ross Karchner"
   # Shown in the footer, and used for rel=me verification.
   [[params.links]]
-    name = "itch.io"
+    name = "Game projects at itch.io"
     url = "https://rosskarchner.itch.io/"
   [[params.links]]
     name = "DC Tech Events"
     url = "https://dctech.events/"
+    note = "Community calendar I built and manage"
   [[params.links]]
     name = "Mastodon"
     url = "https://mastodon.gamedev.place/@16DBatteries"

@@ -560,14 +560,25 @@ h1.entry__title {
 .siteFoot__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
+  align-items: flex-start;
+  gap: 0.75rem 1.25rem;
   margin: 0 0 1rem;
   padding: 0;
   list-style: none;
 }
 
+.siteFoot__links li {
+  display: flex;
+  flex-direction: column;
+}
+
 .siteFoot__links a {
   text-decoration: none;
+}
+
+.siteFoot__note {
+  color: var(--ink-faint);
+  font-size: 0.75rem;
 }
 
 .siteFoot__links a:hover {

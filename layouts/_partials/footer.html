@@ -1,7 +1,10 @@
 <footer class="siteFoot">
   <ul class="siteFoot__links">
     {{- range site.Params.links }}
-      <li><a href="{{ .url }}"{{ if .me }} rel="me"{{ end }}>{{ .name }}</a></li>
+      <li>
+        <a href="{{ .url }}"{{ if .me }} rel="me"{{ end }}>{{ .name }}</a>
+        {{- with .note }}<span class="siteFoot__note">{{ . }}</span>{{ end }}
+      </li>
     {{- end }}
   </ul>
   <p class="siteFoot__meta">
