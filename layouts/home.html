@@ -3,7 +3,10 @@
 
   {{ if eq $paginator.PageNumber 1 }}
     {{ with .Content }}
+      {{/* A body in content/_index.md overrides the one-line tagline. */}}
       <div class="intro">{{ . }}</div>
+    {{ else }}
+      <div class="intro"><p>{{ site.Params.description }}</p></div>
     {{ end }}
   {{ end }}
 

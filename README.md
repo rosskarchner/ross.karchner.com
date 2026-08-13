@@ -13,7 +13,7 @@ reference.
 ```
 hugo.toml                 site config: permalinks, feeds, footer links
 content/
-  _index.md               the blurb at the top of the front page
+  _index.md               front page; a body here overrides the tagline
   games.md                /games/, built from the {{< game >}} shortcode
   posts/                  one Markdown file per post, YYYY-MM-DD-slug.md
   tags/_index.md          blurb on the tag index
@@ -48,6 +48,13 @@ hugo new content posts/$(date +%F)-a-new-post.md
 Delete the `title` line and add `microblog: true` for a short, title-less post —
 those render in full in the stream, while titled posts show a summary with a
 "Read more" link.
+
+## The tagline
+
+`description` in `hugo.toml` is the one place it lives: it's the line under the
+site name on the front page, the `<meta name="description">`, and the OpenGraph
+description. Writing a body into `content/_index.md` replaces the visible line
+with that instead, leaving the meta tags alone.
 
 ## Adding a game
 
