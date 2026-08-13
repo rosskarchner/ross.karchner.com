@@ -33,7 +33,7 @@ static/
   uploads/                media from the archive (~433 MB)
   favicon.svg  CNAME
 tools/
-  import_bar.py           .bar archive -> content/posts/ + static/uploads/
+  import_bar.py           the one-time .bar -> content/ conversion (see below)
   export_bar.py           built site -> a .bar archive
 reference/                the extracted .bar this site was seeded from
 .github/workflows/deploy.yml
@@ -99,15 +99,13 @@ re-export itself:
 hugo && python3 tools/export_bar.py   # -> ross-karchner.bar
 ```
 
-## Re-importing the archive
+## How the posts got here
 
-`tools/import_bar.py` is rerunnable — it wipes `content/posts/` and rebuilds it
-from `reference/feed.json`, rewriting micro.blog URLs to local ones. Any edits
-made to imported posts would be lost, so run it only to redo the import:
-
-```sh
-python3 tools/import_bar.py --archive reference
-```
+`tools/import_bar.py` did the one-time conversion: it read
+`reference/feed.json`, wrote a Markdown file per post, and copied the archive's
+media into `static/uploads/`. It's kept as a record of how the import was done,
+not as a tool to run again — `content/` is the source of truth now, and
+re-running it would overwrite `content/posts/` and discard any edits since.
 
 ## Media that still lives on micro.blog
 
@@ -121,6 +119,17 @@ and will break if the micro.blog account goes away:
 Everything else — 305 files, ~433 MB — is committed under `static/uploads/`.
 One of them, `static/uploads/2025/screencast-from-2025-02-22-22-40-54.mp4`
 (53 MB), is over GitHub's 50 MB warning threshold but under the 100 MB limit.
+
+The archive's screen-capture GIFs are enormous — twelve of them come to about
+218 MB. Two have h264 versions alongside them (`brakes.mp4`,
+`crushed-1016.mp4`, ~95% smaller) and the pages that showed them now embed
+those instead. The originals are kept so their URLs don't break. Converting the
+rest is the single biggest win still available:
+
+```sh
+ffmpeg -i in.gif -movflags +faststart -pix_fmt yuv420p \
+  -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -crf 23 -preset slow -an out.mp4
+```
 
 ## Deployment
 

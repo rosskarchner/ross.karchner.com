@@ -15,4 +15,4 @@ Here is some weekend progress on [Don't Get Crushed](https://rosskarchner.itch.i
  
 You can also see the [previously reported progress](https://ross.karchner.com/2023/10/12/morning-progress.html): visible scores, the ability to restart using the up arrow, and the crusher following the player more closely (and no longer leaving a safe area on the bottom of the screen)
 
-<img src="/uploads/2023/crushed-1016.gif" width="600" height="348" alt="">
+<video src="/uploads/2023/crushed-1016.mp4" width="600" height="348" controls preload="metadata" loop muted playsinline></video>

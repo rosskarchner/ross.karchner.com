@@ -5,7 +5,7 @@ description: "Games Ross Karchner has made, mostly for game jams, mostly in Godo
 
 Here are some games I've made!
 
-{{< game name="Bird Bonkers" date="December 2025" url="https://rosskarchner.itch.io/bird-bonkers" image="/uploads/2025/f5f1b3a729.jpg" >}}
+{{< game name="Bird Bonkers" date="December 2025" url="https://rosskarchner.itch.io/bird-bonkers" video="/uploads/2025/screencast-from-2025-11-30-22-26-38.mp4" poster="/uploads/2025/f5f1b3a729.jpg" >}}
 A Joust-inspired game about birds. Bonk birds, eat fish, fly high! Submitted to the [Github Game-off 2025](https://itch.io/jam/game-off-2025). Made with Godot 4.5. [Play on itch.io](https://rosskarchner.itch.io/bird-bonkers).
 {{< /game >}}
 
@@ -29,7 +29,7 @@ A simple platformer with typing challenges. Created in 10 days for the 2024 Game
 Play and combine cards to summon creatures that march towards the enemy. Created in nine days for Godot Wild Jam #68. An earlier version was also submitted to Ludum Dare 55. Made with Godot 4. [Play on itch.io](https://rosskarchner.itch.io/the-zummoning)
 {{< /game >}}
 
-{{< game name="Brakes Escape" date="February 2024" url="https://rosskarchner.itch.io/brakes-escape" image="/uploads/2024/brakes.gif" >}}
+{{< game name="Brakes Escape" date="February 2024" url="https://rosskarchner.itch.io/brakes-escape" video="/uploads/2024/brakes.mp4" >}}
 Jump as high as you can to escape the rising water. Created in nine days for Godot Wild Jam #66, where it ranked 4th in the "controls" category and 14th in "fun" (out of 158 entries). Made with Godot 4. [Play on itch.io](https://rosskarchner.itch.io/brakes-escape).
 {{< /game >}}
 
@@ -37,7 +37,7 @@ Jump as high as you can to escape the rising water. Created in nine days for God
 A submission to the [20 SECOND GAME JAM 2023](https://itch.io/jam/20-second-game-jam-2023), which tests your ability to differentiate between time intervals of less than 1 second. Made with Godot 4. [Play on itch.io](https://rosskarchner.itch.io/twenty-thousand-milliseconds).
 {{< /game >}}
 
-{{< game name="Don't get Crushed" date="October 2023" url="https://rosskarchner.itch.io/dont-get-crushed" image="/uploads/2023/crushed-1016.gif" >}}
+{{< game name="Don't get Crushed" date="October 2023" url="https://rosskarchner.itch.io/dont-get-crushed" video="/uploads/2023/crushed-1016.mp4" >}}
 Created in 72 hours for Ludum Dare 54, where the theme was "limited space". Made with Godot 3. [Play on itch.io](https://rosskarchner.itch.io/dont-get-crushed)
 {{< /game >}}
 
