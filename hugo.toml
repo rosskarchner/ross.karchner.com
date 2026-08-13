@@ -48,6 +48,10 @@ timeZone = "America/New_York"
 
 [menus]
   [[menus.main]]
+    name = "Games"
+    pageRef = "/games"
+    weight = 5
+  [[menus.main]]
     name = "Archive"
     pageRef = "/posts"
     weight = 10

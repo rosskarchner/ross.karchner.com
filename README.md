@@ -14,6 +14,7 @@ reference.
 hugo.toml                 site config: permalinks, feeds, footer links
 content/
   _index.md               the blurb at the top of the front page
+  games.md                /games/, built from the {{< game >}} shortcode
   posts/                  one Markdown file per post, YYYY-MM-DD-slug.md
   tags/_index.md          blurb on the tag index
 layouts/                  the theme (no external theme, no submodules)
@@ -26,6 +27,7 @@ layouts/                  the theme (no external theme, no submodules)
   taxonomy.html term.html /tags/ and /tags/<tag>/
   single.html 404.html
   _partials/              post.html and the small head/footer pieces
+  _shortcodes/game.html   one entry on the games page
 assets/css/main.css       all the styling
 static/
   uploads/                media from the archive (~433 MB)
@@ -46,6 +48,20 @@ hugo new content posts/$(date +%F)-a-new-post.md
 Delete the `title` line and add `microblog: true` for a short, title-less post —
 those render in full in the stream, while titled posts show a summary with a
 "Read more" link.
+
+## Adding a game
+
+`content/games.md` is a list of `game` shortcodes, newest first:
+
+```
+{{< game name="Bird Bonkers" date="December 2025"
+         url="https://rosskarchner.itch.io/bird-bonkers"
+         video="/uploads/2025/clip.mp4" poster="/uploads/2025/still.jpg" >}}
+The blurb, in Markdown.
+{{< /game >}}
+```
+
+Pass `video` (optionally with `poster`) or `image`, not both.
 
 ## Previewing
 

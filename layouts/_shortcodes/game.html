@@ -1,0 +1,36 @@
+{{- /*
+  One entry on the /games page.
+
+    {{< game name="Bird Bonkers" date="December 2025"
+             url="https://rosskarchner.itch.io/bird-bonkers"
+             image="/uploads/2025/f5f1b3a729.jpg" >}}
+    The blurb, in Markdown.
+    {{< /game >}}
+
+  Pass `video` (with an optional `poster`) or `image`, not both. Videos don't
+  autoplay the way they did on the old page — there are nine of them here, and
+  a few are several megabytes.
+*/ -}}
+{{- $name := .Get "name" -}}
+{{- $url := .Get "url" -}}
+{{- $video := .Get "video" -}}
+{{- $image := .Get "image" -}}
+<section class="game" id="{{ $name | urlize }}">
+  <h2 class="game__title">
+    <a href="{{ $url }}">{{ $name }}</a>
+    {{- with .Get "date" }} <span class="game__date">{{ . }}</span>{{ end }}
+  </h2>
+
+  {{- with $video }}
+  <video class="game__media" src="{{ . | relURL }}" controls preload="metadata"
+         loop muted playsinline{{ with $.Get "poster" }} poster="{{ . | relURL }}"{{ end }}></video>
+  {{- else }}
+  {{- with $image }}
+  <img class="game__media" src="{{ . | relURL }}" alt="{{ $name }} gameplay" loading="lazy">
+  {{- end }}
+  {{- end }}
+
+  <div class="game__body">
+    {{ .Inner | markdownify }}
+  </div>
+</section>
