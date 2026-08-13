@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <header class="pageHead">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}{{ . }}{{ end }}
+  </header>
+
+  <ul class="tagCloud">
+    {{ range .Pages.ByTitle }}
+      <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="tagCloud__count">{{ len .Pages }}</span>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

@@ -1,0 +1,8 @@
+{{- /* A short label for a post: its title, or the opening of a micro post.
+       plainify leaves entities alone, so undo them before truncating. */ -}}
+{{- if .Title -}}
+  {{ .Title }}
+{{- else -}}
+  {{- $opening := .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 48 -}}
+  {{- if $opening }}{{ $opening }}{{ else }}{{ .Date.Format "Jan 2, 2006" }}{{ end -}}
+{{- end -}}

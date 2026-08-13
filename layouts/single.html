@@ -1,0 +1,23 @@
+{{ define "main" }}
+  {{ if eq .Section "posts" }}
+    {{ partial "post.html" (dict "page" . "heading" "h1" "full" true) }}
+
+    <nav class="postNav" aria-label="More posts">
+      {{ with .PrevInSection }}
+        <a class="postNav__next" href="{{ .RelPermalink }}" rel="next">
+          <span>Newer</span> {{ partial "entry-label.html" . }}
+        </a>
+      {{ end }}
+      {{ with .NextInSection }}
+        <a class="postNav__prev" href="{{ .RelPermalink }}" rel="prev">
+          <span>Older</span> {{ partial "entry-label.html" . }}
+        </a>
+      {{ end }}
+    </nav>
+  {{ else }}
+    <article class="page">
+      <h1>{{ .Title }}</h1>
+      {{ .Content }}
+    </article>
+  {{ end }}
+{{ end }}

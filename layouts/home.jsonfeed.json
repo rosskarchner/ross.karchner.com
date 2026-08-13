@@ -1,0 +1,29 @@
+{{- /*
+  A JSON Feed (https://jsonfeed.org/version/1) carrying the full text of every
+  post — the same shape as the feed.json inside a .bar blog archive
+  (https://indieweb.org/blog_archive_format), so this site can be re-archived
+  from its own output.
+*/ -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $items := slice -}}
+{{- range $posts -}}
+  {{- $item := dict
+      "id" .Permalink
+      "url" .Permalink
+      "date_published" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "content_html" (.Content | string)
+      "content_text" (.RawContent | string)
+  -}}
+  {{- with .Title }}{{ $item = merge $item (dict "title" .) }}{{ end -}}
+  {{- with .Params.tags }}{{ $item = merge $item (dict "tags" .) }}{{ end -}}
+  {{- $items = $items | append $item -}}
+{{- end -}}
+{{- dict
+    "version" "https://jsonfeed.org/version/1"
+    "title" site.Title
+    "description" site.Params.description
+    "home_page_url" site.BaseURL
+    "feed_url" .Permalink
+    "author" (dict "name" site.Params.author "url" site.BaseURL)
+    "items" $items
+  | jsonify (dict "indent" "  ") -}}

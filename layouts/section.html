@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <header class="pageHead">
+    <h1>{{ .Title }}</h1>
+    {{ with .Content }}{{ . }}{{ end }}
+    <p class="pageHead__meta">
+      {{ len .RegularPagesRecursive }} posts, {{ (index .RegularPagesRecursive.ByDate 0).Date.Format "January 2006" }} to {{ (index .RegularPagesRecursive.ByDate.Reverse 0).Date.Format "January 2006" }}.
+      Also available <a href="{{ "/all.html" | relURL }}">in full on one page</a>.
+    </p>
+  </header>
+
+  {{ range .RegularPagesRecursive.GroupByDate "2006" }}
+    <section class="archive__year">
+      <h2 class="archive__heading">{{ .Key }}</h2>
+      <ul class="archive__list">
+        {{ range .Pages }}
+          <li class="archive__item">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2" }}</time>
+            <a href="{{ .RelPermalink }}">{{ partial "entry-label.html" . }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  {{ end }}
+{{ end }}

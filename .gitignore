@@ -1,0 +1,8 @@
+# Hugo build output and caches
+/public/
+/resources/_gen/
+/.hugo_build.lock
+
+# The archive's media is committed under static/uploads/ instead; keeping a
+# second copy here would double the size of the repository.
+/reference/uploads/

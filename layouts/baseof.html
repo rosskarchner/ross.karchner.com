@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ partial "title.html" . }}</title>
+  <meta name="description" content="{{ partial "description.html" . }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{ partial "head-css.html" . }}
+  {{ with .OutputFormats.Get "rss" }}
+    <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{ end }}
+  <link rel="alternate" type="application/json" href="{{ "feed.json" | absURL }}" title="{{ site.Title }} (JSON Feed)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  {{ partial "opengraph.html" . }}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="masthead">
+    <a class="masthead__title p-name u-url" rel="me" href="{{ "/" | relURL }}">{{ site.Title }}</a>
+    <nav class="masthead__nav" aria-label="Main">
+      {{ range site.Menus.main }}
+        <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+      {{ end }}
+    </nav>
+  </header>
+
+  <main id="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

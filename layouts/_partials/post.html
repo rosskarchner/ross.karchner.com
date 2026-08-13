@@ -1,0 +1,48 @@
+{{- /*
+  One entry, marked up as a microformats2 h-entry.
+
+  Args:
+    page     the page to render
+    heading  heading level for the title ("h1" on a post's own page, else "h2")
+    full     true to render the whole post, false to render a summary
+
+  Titles are wrapped in a literal h1/h2 rather than a dynamic tag name,
+  because html/template escapes `<{{ $tag }}>` as text.
+*/ -}}
+{{- $p := .page -}}
+{{- $micro := not $p.Title -}}
+<article class="h-entry entry{{ if $micro }} entry--micro{{ end }}">
+  {{- with $p.Title }}
+    {{- if eq $.heading "h1" }}
+  <h1 class="entry__title p-name"><a class="u-url" href="{{ $p.RelPermalink }}">{{ . }}</a></h1>
+    {{- else }}
+  <h2 class="entry__title p-name"><a class="u-url" href="{{ $p.RelPermalink }}">{{ . }}</a></h2>
+    {{- end }}
+  {{- end }}
+
+  <div class="e-content entry__body">
+    {{- if or .full $micro -}}
+      {{ $p.Content }}
+    {{- else -}}
+      {{ $p.Summary }}
+      {{- if $p.Truncated }}
+        <p><a class="entry__more" href="{{ $p.RelPermalink }}">Read more →</a></p>
+      {{- end }}
+    {{- end -}}
+  </div>
+
+  <footer class="entry__meta">
+    <a class="u-url" href="{{ $p.RelPermalink }}">
+      <time class="dt-published" datetime="{{ $p.Date.Format "2006-01-02T15:04:05Z07:00" }}">
+        {{ $p.Date.Format "Jan 2, 2006" }}
+      </time>
+    </a>
+    {{- with $p.Params.tags }}
+    <ul class="entry__tags">
+      {{- range . }}
+      <li><a class="p-category" href="{{ (urlize .) | printf "/tags/%s/" | relURL }}">{{ . }}</a></li>
+      {{- end }}
+    </ul>
+    {{- end }}
+  </footer>
+</article>

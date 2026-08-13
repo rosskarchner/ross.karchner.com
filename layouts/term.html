@@ -1,0 +1,15 @@
+{{ define "main" }}
+  <header class="pageHead">
+    <h1>{{ .Title }}</h1>
+    <p class="pageHead__meta">{{ len .Pages }} post{{ if ne (len .Pages) 1 }}s{{ end }} tagged “{{ .Title }}”. <a href="{{ "/tags/" | relURL }}">All tags</a></p>
+  </header>
+
+  <ul class="archive__list">
+    {{ range .Pages.ByDate.Reverse }}
+      <li class="archive__item">
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+        <a href="{{ .RelPermalink }}">{{ partial "entry-label.html" . }}</a>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

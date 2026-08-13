@@ -1,0 +1,17 @@
+{{ define "main" }}
+  {{ $paginator := .Paginate (where site.RegularPages "Section" "posts") }}
+
+  {{ if eq $paginator.PageNumber 1 }}
+    {{ with .Content }}
+      <div class="intro">{{ . }}</div>
+    {{ end }}
+  {{ end }}
+
+  <div class="h-feed stream">
+    {{ range $paginator.Pages }}
+      {{ partial "post.html" (dict "page" . "heading" "h2" "full" false) }}
+    {{ end }}
+  </div>
+
+  {{ partial "pagination.html" . }}
+{{ end }}

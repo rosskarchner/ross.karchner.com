@@ -1,0 +1,12 @@
+<footer class="siteFoot">
+  <ul class="siteFoot__links">
+    {{- range site.Params.links }}
+      <li><a href="{{ .url }}"{{ if .me }} rel="me"{{ end }}>{{ .name }}</a></li>
+    {{- end }}
+  </ul>
+  <p class="siteFoot__meta">
+    <a href="{{ "index.xml" | relURL }}">RSS</a> ·
+    <a href="{{ "feed.json" | relURL }}">JSON Feed</a> ·
+    <span>{{ site.Title }}</span>
+  </p>
+</footer>

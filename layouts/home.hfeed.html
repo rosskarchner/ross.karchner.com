@@ -1,0 +1,17 @@
+{{ define "main" }}
+  {{ $posts := where site.RegularPages "Section" "posts" }}
+  <header class="pageHead">
+    <h1>Every post</h1>
+    <p class="pageHead__meta">
+      All {{ len $posts }} posts, in full, on one page — an
+      <a href="https://microformats.org/wiki/h-feed">h-feed</a> for archiving.
+      The <a href="{{ "/posts/" | relURL }}">dated index</a> is easier to read.
+    </p>
+  </header>
+
+  <div class="h-feed stream">
+    {{ range $posts }}
+      {{ partial "post.html" (dict "page" . "heading" "h2" "full" true) }}
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,0 +1,9 @@
+{{- if .IsHome -}}
+  {{- site.Title -}}
+{{- else if .Title -}}
+  {{- .Title }} — {{ site.Title -}}
+{{- else -}}
+  {{- /* Micro posts have no title; fall back to their opening words. */ -}}
+  {{- $opening := .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 60 -}}
+  {{- if $opening }}{{ $opening }}{{ else }}{{ .Date.Format "Jan 2, 2006" }}{{ end }} — {{ site.Title -}}
+{{- end -}}

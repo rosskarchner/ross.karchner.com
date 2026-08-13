@@ -1,0 +1,89 @@
+baseURL = "https://ross.karchner.com/"
+locale = "en-US"
+title = "Ross Karchner"
+copyright = "Ross Karchner"
+enableRobotsTXT = true
+# Tags keep the capitalisation they were written with ("screenshotsaturday").
+capitalizeListTitles = false
+timeZone = "America/New_York"
+
+# Posts keep the permalinks they had on micro.blog: /2026/07/19/or-not.html
+[permalinks.page]
+  posts = "/:year/:month/:day/:slug"
+
+[uglyURLs]
+  posts = true
+
+[pagination]
+  pagerSize = 25
+
+[taxonomies]
+  tag = "tags"
+
+[params]
+  description = "Software, side projects, and games in progress."
+  author = "Ross Karchner"
+  # Shown in the footer, and used for rel=me verification.
+  [[params.links]]
+    name = "itch.io"
+    url = "https://rosskarchner.itch.io/"
+  [[params.links]]
+    name = "DC Tech Events"
+    url = "https://dctech.events/"
+  [[params.links]]
+    name = "Mastodon"
+    url = "https://mastodon.gamedev.place/@16DBatteries"
+    me = true
+  [[params.links]]
+    name = "Bluesky"
+    url = "https://bsky.app/profile/rosskarchner.bsky.social"
+    me = true
+  [[params.links]]
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/rosskarchner/"
+  [[params.links]]
+    name = "Credly"
+    url = "https://www.credly.com/users/rossk"
+
+[menus]
+  [[menus.main]]
+    name = "Archive"
+    pageRef = "/posts"
+    weight = 10
+  [[menus.main]]
+    name = "Tags"
+    pageRef = "/tags"
+    weight = 20
+
+# Every post, full text, in one microformats2 h-feed at /all.html — the
+# index.html a .bar archive carries.
+[outputFormats.hfeed]
+  mediaType = "text/html"
+  baseName = "all"
+  isHTML = true
+  rel = "alternate"
+
+# A JSON Feed at /feed.json, the same format the .bar archive uses.
+[outputFormats.jsonfeed]
+  mediaType = "application/json"
+  baseName = "feed"
+  isPlainText = true
+  rel = "alternate"
+
+[outputs]
+  home = ["html", "rss", "jsonfeed", "hfeed"]
+  section = ["html"]
+  taxonomy = ["html"]
+  term = ["html"]
+
+# Posts are Markdown with some inline HTML (video embeds, book covers), so
+# goldmark has to pass raw HTML through.
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.parser]
+  [markup.goldmark.parser.attribute]
+    block = true
+
+[services.rss]
+  limit = -1

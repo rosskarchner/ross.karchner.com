@@ -1,0 +1,7 @@
+{{- if .Description -}}
+  {{ .Description }}
+{{- else if .IsPage -}}
+  {{ .Summary | plainify | htmlUnescape | strings.TrimSpace | truncate 180 }}
+{{- else -}}
+  {{ site.Params.description }}
+{{- end -}}
