@@ -116,9 +116,8 @@ and will break if the micro.blog account goes away:
 - 6 screencasts served as HLS from `cdn.uploads.micro.mov`, plus their poster
   frames on `cdn.uploads.micro.blog`
 
-Everything else — 305 files, ~433 MB — is committed under `static/uploads/`.
-One of them, `static/uploads/2025/screencast-from-2025-02-22-22-40-54.mp4`
-(53 MB), is over GitHub's 50 MB warning threshold but under the 100 MB limit.
+Everything else is committed under `static/uploads/`, ~207 MB. No file is over
+GitHub's 50 MB warning threshold; the largest is 16 MB.
 
 ## The GIF originals
 
@@ -127,8 +126,13 @@ They're now h264 instead (18 MB, same frame counts), and the posts that showed
 them embed the `.mp4` alongside each one. Four tiny sprite GIFs, all under
 5 KB, were left alone.
 
+The Robo Rampage screencast got the same treatment: it was a 53 MB 1080p
+capture at 5.3 Mbps, and is now 720p at 16 MB. The page never renders it wider
+than ~670 px, so the extra resolution bought nothing.
+
 The originals are **not in this repository or its history**. They live in a
-private S3 bucket, at the same paths they had on the site:
+private S3 bucket, at the same paths they had on the site (the screencast with
+an `-original-1080p` suffix, since its path is still in use):
 
 ```
 s3://ross-karchner-com-media-archive/uploads/2023/roguelike.gif
