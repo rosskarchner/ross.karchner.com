@@ -1,0 +1,16 @@
+{{- /*
+  IndieAuth and Micropub discovery.
+
+  Clients that want to sign someone in as https://ross.karchner.com/ fetch this
+  page and look for these link relations. `indieauth-metadata` is what the
+  current spec uses; `authorization_endpoint` and `token_endpoint` are the older
+  W3C Note's discovery, kept because plenty of deployed clients still only look
+  for those. The endpoints themselves are the SAM app in indieauth/.
+*/ -}}
+{{- with site.Params.indieauth }}
+  {{- $base := strings.TrimSuffix "/" .endpoint }}
+  <link rel="indieauth-metadata" href="{{ $base }}/.well-known/oauth-authorization-server">
+  <link rel="authorization_endpoint" href="{{ $base }}/authorize">
+  <link rel="token_endpoint" href="{{ $base }}/token">
+  <link rel="micropub" href="{{ $base }}/micropub">
+{{- end }}

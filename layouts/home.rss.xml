@@ -6,11 +6,12 @@
     <description>{{ site.Params.description }}</description>
     <language>{{ site.Language.Locale | default "en-US" }}</language>
     {{- with site.Copyright }}<copyright>{{ . }}</copyright>{{ end }}
-    {{- with (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    {{- $entries := (where site.RegularPages "Section" "in" (slice "posts" "games")).ByDate.Reverse -}}
+    {{- with $entries }}
       <lastBuildDate>{{ (index . 0).Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
     {{- end }}
     <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
-    {{- range (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+    {{- range $entries }}
     <item>
       <title>{{ partial "entry-label.html" . }}</title>
       <link>{{ .Permalink }}</link>

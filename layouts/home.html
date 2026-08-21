@@ -1,5 +1,6 @@
 {{ define "main" }}
-  {{ $paginator := .Paginate (where site.RegularPages "Section" "posts") }}
+  {{ $entries := (where site.RegularPages "Section" "in" (slice "posts" "games")).ByDate.Reverse }}
+  {{ $paginator := .Paginate $entries }}
 
   {{ if eq $paginator.PageNumber 1 }}
     {{ with .Content }}

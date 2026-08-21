@@ -1,0 +1,26 @@
+{{ define "main" }}
+  <article class="page">
+    <section class="game" id="{{ .File.ContentBaseName | urlize }}">
+      <h1 class="game__title">
+        {{ with .Params.itch_url }}
+          <a href="{{ . }}">{{ $.Title }}</a>
+        {{ else }}
+          {{ .Title }}
+        {{ end }}
+        <span class="game__date">{{ .Date.Format "January 2006" }}</span>
+      </h1>
+
+      {{ with .Params.video }}
+        <video class="game__media" src="{{ . | relURL }}" controls preload="metadata" loop muted playsinline{{ with $.Params.poster }} poster="{{ . | relURL }}"{{ end }}></video>
+      {{ else }}
+        {{ with .Params.image }}
+          <img class="game__media" src="{{ . | relURL }}" alt="{{ $.Title }} gameplay" loading="lazy">
+        {{ end }}
+      {{ end }}
+
+      <div class="game__body">
+        {{ .Content }}
+      </div>
+    </section>
+  </article>
+{{ end }}

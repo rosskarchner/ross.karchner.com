@@ -4,7 +4,7 @@
   (https://indieweb.org/blog_archive_format), so this site can be re-archived
   from its own output.
 */ -}}
-{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $posts := (where site.RegularPages "Section" "in" (slice "posts" "games")).ByDate.Reverse -}}
 {{- $items := slice -}}
 {{- range $posts -}}
   {{- $item := dict

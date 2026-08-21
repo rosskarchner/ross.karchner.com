@@ -1,9 +1,9 @@
 {{ define "main" }}
-  {{ $posts := where site.RegularPages "Section" "posts" }}
+  {{ $posts := (where site.RegularPages "Section" "in" (slice "posts" "games")).ByDate.Reverse }}
   <header class="pageHead">
-    <h1>Every post</h1>
+    <h1>Every entry</h1>
     <p class="pageHead__meta">
-      All {{ len $posts }} posts, in full, on one page — an
+      All {{ len $posts }} posts and games, in full, on one page — an
       <a href="https://microformats.org/wiki/h-feed">h-feed</a> for archiving.
       The <a href="{{ "/posts/" | relURL }}">dated index</a> is easier to read.
     </p>
