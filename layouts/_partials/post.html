@@ -8,19 +8,43 @@
 
   Titles are wrapped in a literal h1/h2 rather than a dynamic tag name,
   because html/template escapes `<{{ $tag }}>` as text.
+
+  A page in the "games" section is styled like its entry on /games: the
+  title links straight to itch.io (not marked u-url, since it isn't this
+  entry's permalink) and its video/image sits above the body.
 */ -}}
 {{- $p := .page -}}
 {{- $micro := not $p.Title -}}
+{{- $isGame := eq $p.Section "games" -}}
 <article class="h-entry entry{{ if $micro }} entry--micro{{ end }}">
   {{- with $p.Title }}
-    {{- if eq $.heading "h1" }}
+    {{- if $isGame }}
+      {{- if eq $.heading "h1" }}
+  <h1 class="entry__title game__title p-name">
+      {{- else }}
+  <h2 class="entry__title game__title p-name">
+      {{- end }}
+    {{- with $p.Params.itch_url }}<a href="{{ . }}">{{ $p.Title }}</a>{{ else }}<a class="u-url" href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>{{ end }}
+    <span class="game__date">{{ $p.Date.Format "January 2006" }}</span>
+    {{- if eq $.heading "h1" }}</h1>{{ else }}</h2>{{ end }}
+    {{- else if eq $.heading "h1" }}
   <h1 class="entry__title p-name"><a class="u-url" href="{{ $p.RelPermalink }}">{{ . }}</a></h1>
     {{- else }}
   <h2 class="entry__title p-name"><a class="u-url" href="{{ $p.RelPermalink }}">{{ . }}</a></h2>
     {{- end }}
   {{- end }}
 
-  <div class="e-content entry__body">
+  {{- if $isGame }}
+    {{- with $p.Params.video }}
+  <video class="game__media" src="{{ . | relURL }}" controls preload="metadata" loop muted playsinline{{ with $p.Params.poster }} poster="{{ . | relURL }}"{{ end }}></video>
+    {{- else }}
+      {{- with $p.Params.image }}
+  <img class="game__media" src="{{ . | relURL }}" alt="{{ $p.Title }} gameplay" loading="lazy">
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  <div class="e-content entry__body{{ if $isGame }} game__body{{ end }}">
     {{- if or .full $micro -}}
       {{ $p.Content }}
     {{- else -}}
