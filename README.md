@@ -114,19 +114,23 @@ media into `static/uploads/`. It's kept as a record of how the import was done,
 not as a tool to run again — `content/` is the source of truth now, and
 re-running it would overwrite `content/posts/` and discard any edits since.
 
-## Media that still lives on micro.blog
+## Media that used to live on micro.blog
 
-The archive did not include everything the posts embed. These are still hotlinked
-and will break if the micro.blog account goes away:
+The archive did not include everything the posts embed, so some media was
+still hotlinked from micro.blog. It's all local now:
 
-- 6 screencasts served as HLS from `cdn.uploads.micro.mov`, plus their poster
-  frames on `cdn.uploads.micro.blog`
+- The ~143 book covers that used to hotlink `cdn.micro.blog` (the "Finished
+  reading" posts) are under `static/uploads/books/<isbn>.jpg`.
+- The 6 screencasts that used to hotlink an HLS (`.m3u8`) stream from
+  `cdn.uploads.micro.mov` — which most browsers can't play directly in a
+  `<video>` tag — were re-encoded to `.mp4` with `ffmpeg` and live alongside
+  the rest of a post's media in `static/uploads/<year>/`. Their poster frames
+  had already been pulled from `cdn.uploads.micro.blog` into
+  `static/uploads/<year>/frames/` by the original import; only the posts'
+  `poster=` attributes still pointed at the remote copies.
 
-The ~143 book covers that used to hotlink `cdn.micro.blog` (the "Finished
-reading" posts) are now local, under `static/uploads/books/<isbn>.jpg`.
-
-Everything else is committed under `static/uploads/`, ~207 MB. No file is over
-GitHub's 50 MB warning threshold; the largest is 16 MB.
+Everything is committed under `static/uploads/`, ~265 MB. No file is over
+GitHub's 50 MB warning threshold; the largest is 23 MB.
 
 ## The GIF originals
 
