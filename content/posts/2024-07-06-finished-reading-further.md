@@ -5,6 +5,6 @@ slug: "finished-reading-further"
 source_url: "https://rossk.micro.blog/2024/07/06/finished-reading-further.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9798985966176/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9798985966176.png" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Finished reading: [Further Explorations: 50 Years of Text Games](https://micro.blog/books/9798985966176) by Aaron A Reed 📚

@@ -5,7 +5,7 @@ slug: "currently-reading-how"
 source_url: "https://rossk.micro.blog/2023/11/21/currently-reading-how.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9781119085294/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9781119085294.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Currently reading: [How to Measure Anything in Cybersecurity Risk](https://micro.blog/books/9781119085294) by Douglas W. Hubbard 📚
 

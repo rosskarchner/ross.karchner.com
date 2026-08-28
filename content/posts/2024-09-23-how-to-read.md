@@ -5,7 +5,7 @@ slug: "how-to-read"
 source_url: "https://rossk.micro.blog/2024/09/23/how-to-read.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9780826414182/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9780826414182.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Finished reading: [How to Read Superhero Comics and why](https://micro.blog/books/9780826414182) by Geoff Klock 📚
 

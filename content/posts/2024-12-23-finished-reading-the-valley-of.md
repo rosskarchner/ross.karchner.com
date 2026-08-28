@@ -5,7 +5,7 @@ slug: "finished-reading-the-valley-of"
 source_url: "https://rossk.micro.blog/2024/12/23/finished-reading-the-valley-of.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9783849689919/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9783849689919.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Finished listening: [The Valley of Fear](https://micro.blog/books/9783849689919) by Arthur Conan Doyle 📚
 

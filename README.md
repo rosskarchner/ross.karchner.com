@@ -119,9 +119,11 @@ re-running it would overwrite `content/posts/` and discard any edits since.
 The archive did not include everything the posts embed. These are still hotlinked
 and will break if the micro.blog account goes away:
 
-- ~143 book covers on `cdn.micro.blog` (the "Finished reading" posts)
 - 6 screencasts served as HLS from `cdn.uploads.micro.mov`, plus their poster
   frames on `cdn.uploads.micro.blog`
+
+The ~143 book covers that used to hotlink `cdn.micro.blog` (the "Finished
+reading" posts) are now local, under `static/uploads/books/<isbn>.jpg`.
 
 Everything else is committed under `static/uploads/`, ~207 MB. No file is over
 GitHub's 50 MB warning threshold; the largest is 16 MB.

@@ -5,7 +5,7 @@ slug: "all-of-the-marvels"
 source_url: "https://rossk.micro.blog/2025/08/04/all-of-the-marvels.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9780735222182/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9780735222182.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 I've finished listening to [All of the Marvels](https://micro.blog/books/9780735222182) by Douglas Wolk.
 

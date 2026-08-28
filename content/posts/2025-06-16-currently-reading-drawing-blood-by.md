@@ -5,6 +5,6 @@ slug: "currently-reading-drawing-blood-by"
 source_url: "https://rossk.micro.blog/2025/06/16/currently-reading-drawing-blood-by.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9781534371675/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9781534371675.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Currently reading: [Drawing Blood](https://micro.blog/books/9781534371675) by Kevin Eastman 📚

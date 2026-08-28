@@ -5,7 +5,7 @@ slug: "currently-reading-bea"
 source_url: "https://rossk.micro.blog/2024/01/24/currently-reading-bea.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9781250323637/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9781250323637.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Currently reading: [Bea Wolf](https://micro.blog/books/9781250323637) by Zach Weinersmith 📚
 

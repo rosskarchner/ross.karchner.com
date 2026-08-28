@@ -5,7 +5,7 @@ slug: "currently-listening-the"
 source_url: "https://rossk.micro.blog/2024/02/07/currently-listening-the.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9781401236519/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9781401236519.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Currently listening: [The Sandman Vol. 2: The Doll's House](https://micro.blog/books/9781401236519) by Neil Gaiman 📚
 

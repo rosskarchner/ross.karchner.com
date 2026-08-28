@@ -5,7 +5,7 @@ slug: "finished-reading-failure-to-launch"
 source_url: "https://rossk.micro.blog/2025/06/29/finished-reading-failure-to-launch.html"
 ---
 
-<img src="https://cdn.micro.blog/books/9781638991236/cover.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
+<img src="/uploads/books/9781638991236.jpg" align="left" class="microblog_book" style="max-width: 60px; margin-right: 20px; margin-top: 0px; padding-top: 0px;">
 
 Finished reading: [Failure to Launch: A Tour of Ill-Fated Futures](https://micro.blog/books/9781638991236) by Kel Mcdonald 📚
 
