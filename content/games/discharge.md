@@ -1,6 +1,6 @@
 ---
 title: "Discharge"
-date: 2026-124-01T00:00:00-04:00
+date: 2026-08-28-01T00:00:00-04:00
 slug: "discharge"
 itch_url: "https://rosskarchner.itch.io/discharge"
 video: "/uploads/2026/Screencast From 2026-08-28 11-07-26.mp4"
